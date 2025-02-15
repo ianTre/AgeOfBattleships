@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Age of Battleships.sln"
+    "dotnet.defaultSolution": "AgeOfBattleships.sln"
 }
