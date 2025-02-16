@@ -33,7 +33,6 @@ public class MapController : MonoBehaviour
         GameObject infoText = GameObject.Find("InfoText");
         foreach (Transform child in map.transform)
         {
-            Debug.Log("Tile");
             Tile tile =child.GetComponent<Tile>();
 
             tile.Xpos = tile.transform.position.x;

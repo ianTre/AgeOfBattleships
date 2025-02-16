@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 8268306117396276325}
   m_Layer: 0
   m_Name: Destroyer
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,6 +479,7 @@ MonoBehaviour:
   attackPoints: 0
   defencePoints: 0
   Speed: 0
+  Size: 4
   SelectedAction: 0
   ocuppiedTiles: []
 --- !u!1 &4955282738376264460

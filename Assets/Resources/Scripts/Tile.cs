@@ -52,7 +52,6 @@ public class Tile : MonoBehaviour
     {
         if(hoverTriggered)
             return;
-        Debug.Log("Mouse in ("  + ZCoord.ToString() + XCoord.ToString() + ")" );
         hoverTriggered=true;
         // Change the color of the GameObject to red when the mouse is over GameObject
         HighlighMe(hoverMainMaterial);
@@ -84,4 +83,5 @@ public class Tile : MonoBehaviour
             nTile.DeHighlighMe();
         }
     }
+
 }

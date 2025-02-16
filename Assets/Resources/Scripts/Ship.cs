@@ -9,14 +9,32 @@ public class Ship : MonoBehaviour
     public int attackPoints;
     public int defencePoints;
     public int Speed;
+    public int Size;
     public Mode SelectedAction;
 
     public List<Tile> ocuppiedTiles;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ocuppiedTiles = new List<Tile>();
+    }
+
+    public void AddOcuppiedTile(Tile tile)
+    {
+        if(!ocuppiedTiles.Contains(tile)) 
+        { 
+            ocuppiedTiles.Add(tile);
+        }
+    }
+
+    public void RemoveOcuppiedTile(Tile tile) 
+    {
+        if (!ocuppiedTiles.Contains(tile))
+        {
+            ocuppiedTiles.Remove(tile);
+        }
     }
 
     // Update is called once per frame
@@ -24,6 +42,7 @@ public class Ship : MonoBehaviour
     {
         
     }
+    
 }
 
 public enum Mode

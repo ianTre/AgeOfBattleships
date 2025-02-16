@@ -16,6 +16,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Vector2 mOriginalLocalPointerPosition;
     private Vector3 mOriginalPanelLocalPosition;
     private Vector2 mOriginalPosition;
+    MapController mapController;
     
     // Start is called before the first frame update
     void Start() {
@@ -48,12 +49,13 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit, 1000.0f)) 
         { 
-            Vector3 worldPoint = hit.point;
-            CreateObject(worldPoint);
+            //Vector3 worldPoint = hit.point;
+            Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
+            CreateObject(impactedTile);
         }
     }
 
-    private void CreateObject(Vector3 position)
+    private void CreateObject(Tile tile)
     {
         if(PrefabToInstantiate == null)
         {
@@ -61,6 +63,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             return;
         }
 
+        Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 5, tile.Zpos);
         GameObject obj = Instantiate(PrefabToInstantiate, position, Quaternion.identity);
     }
 
@@ -75,6 +78,5 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        
     }
 }

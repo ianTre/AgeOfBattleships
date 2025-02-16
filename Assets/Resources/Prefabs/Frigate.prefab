@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 6258224847977493256}
   m_Layer: 0
   m_Name: Frigate
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -787,6 +787,7 @@ MonoBehaviour:
   attackPoints: 0
   defencePoints: 0
   Speed: 0
+  Size: 0
   SelectedAction: 0
   ocuppiedTiles: []
 --- !u!1 &7577004014990442360
