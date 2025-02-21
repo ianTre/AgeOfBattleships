@@ -11,6 +11,7 @@ public class Ship : MonoBehaviour
     public int Speed;
     public int Size;
     public Mode SelectedAction;
+    public bool hasfocus = false;
 
     public List<Tile> ocuppiedTiles;
 
@@ -40,9 +41,23 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      if(Input.GetKey(KeyCode.Delete) && hasfocus)
+      {
+        Destroy(this);
+      } 
     }
-    
+
+    public void OnMouseEnter()
+    {
+        Debug.Log("ahsba");
+        hasfocus = true;
+    }
+
+    public void OnMouseExit()
+    {
+        hasfocus = false;
+    }
+
 }
 
 public enum Mode

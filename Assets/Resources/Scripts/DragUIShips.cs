@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -64,7 +68,14 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
 
         Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 5, tile.Zpos);
-        GameObject obj = Instantiate(PrefabToInstantiate, position, Quaternion.identity);
+        if(Input.GetKey(KeyCode.LeftControl))
+        {
+            Instantiate(PrefabToInstantiate, position, UnityEngine.Quaternion.Euler(new Vector3(0,90,0) ));
+
+        }
+        else
+        {        GameObject obj = Instantiate(PrefabToInstantiate, position, Quaternion.identity);
+        }
     }
 
     IEnumerator Coroutine_MoveUIElement(RectTransform r , Vector2 targetPosition , float duration = 0.1f)
