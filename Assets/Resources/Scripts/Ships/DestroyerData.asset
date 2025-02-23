@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DestroyerData
   m_EditorClassIdentifier: 
   shipName: Destroyer
+  image: {fileID: 21300000, guid: ad20ff89273b0a34fb92bdef26bcf371, type: 3}
   quantity: 2
-  panelname: 
+  panelname: Ship3Panel

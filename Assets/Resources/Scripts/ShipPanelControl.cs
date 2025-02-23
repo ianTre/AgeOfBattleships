@@ -26,21 +26,23 @@ public class ShipPanelControl : MonoBehaviour
 
     public void SetData(ShipInformationScriptableObject shipInformationScriptableObject)
     {
+        
         RectTransform shipInfoPanel = GetComponent<RectTransform>();
         shipInfoPanel.gameObject.SetActive(true);
-        namelabel.text = "Name: " + shipInformationScriptableObject.name;
         GameObject panel = GameObject.Find(shipInformationScriptableObject.panelname);
         RectTransform shipPanels = panel.GetComponent<RectTransform>();
+        namelabel.text = "Name: " + shipInformationScriptableObject.shipName.ToString();
+        shipUsableNumber.text = "Number of ships available: " + shipInformationScriptableObject.quantity;
         shipInfoPanel.anchoredPosition = new Vector2(shipPanels.anchoredPosition.x, shipInfoPanel.anchoredPosition.y);
         panelImage.sprite = shipInformationScriptableObject.image;
       
     }
 
-        public void ClearPanel(ShipInformationScriptableObject shipInformationScriptableObject)
-{
-   RectTransform shipInfoPanel = GetComponent<RectTransform>();
+    public void ClearPanel(ShipInformationScriptableObject shipInformationScriptableObject)
+    {
+        RectTransform shipInfoPanel = GetComponent<RectTransform>();
         shipInfoPanel.gameObject.SetActive(false);
-}
+    }
 
   
 }

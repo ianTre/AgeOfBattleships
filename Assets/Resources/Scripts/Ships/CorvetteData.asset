@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: CorvetteData
   m_EditorClassIdentifier: 
   shipName: Corvette
+  image: {fileID: 21300000, guid: d3a388b7b657100469b5a42d706a4ca9, type: 3}
   quantity: 3
-  panelname: 
+  panelname: Ship4Panel

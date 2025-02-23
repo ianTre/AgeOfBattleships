@@ -12,7 +12,6 @@ public class Ship : MonoBehaviour
     public Mode SelectedAction;
     public bool hasfocus = false;
     public ShipType shipType;
-
     public List<Tile> ocuppiedTiles;
 
 
