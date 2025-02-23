@@ -14,7 +14,6 @@ public class TileCollider : MonoBehaviour
     {
         if (other.tag == "Ship")
         {
-            Debug.Log("Me pego un ship");
             Tile tile = GetComponent<Tile>();
             other.gameObject.GetComponent<Ship>().AddOcuppiedTile(tile);
         }

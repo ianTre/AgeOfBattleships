@@ -20,7 +20,6 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Vector2 mOriginalLocalPointerPosition;
     private Vector3 mOriginalPanelLocalPosition;
     private Vector2 mOriginalPosition;
-    MapController mapController;
     
     // Start is called before the first frame update
     void Start() {
@@ -30,6 +29,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         mOriginalPanelLocalPosition = UIDragElement.localPosition; 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(Canvas,eventData.position,eventData.pressEventCamera,out mOriginalLocalPointerPosition);
+        MapController.instance.SetDragAndDroping(true);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -44,6 +44,20 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 Vector3 offsetToOriginal = localPointerPosition - mOriginalLocalPointerPosition;
                 UIDragElement.localPosition = mOriginalPanelLocalPosition + offsetToOriginal;
             }
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if(Physics.Raycast(ray, out hit, 1000.0f)) 
+        { 
+            //Vector3 worldPoint = hit.point;
+            if(hit.collider.gameObject.tag == "WaterTile")
+            {
+                Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
+                Ship ship = PrefabToInstantiate.GetComponent<Ship>();
+                MapController.instance.CanShipBeDeployed(impactedTile,ship);
+            }
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -54,9 +68,16 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if(Physics.Raycast(ray, out hit, 1000.0f)) 
         { 
             //Vector3 worldPoint = hit.point;
-            Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
-            CreateObject(impactedTile);
+            if(hit.collider.gameObject.tag == "WaterTile")
+            {
+                Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
+
+                CreateObject(impactedTile);
+            }
         }
+        MapController.instance.SetDragAndDroping(false);
+        MapController.instance.CleanTiles();
+        PlayerController.instance.leftCtrlPressed=false;
     }
 
     private void CreateObject(Tile tile)
@@ -68,14 +89,19 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
 
         Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 5, tile.Zpos);
-        if(Input.GetKey(KeyCode.LeftControl))
-        {
-            Instantiate(PrefabToInstantiate, position, UnityEngine.Quaternion.Euler(new Vector3(0,90,0) ));
-
-        }
+        GameObject obj;
+        
+        Quaternion quaternion;
+        if(PlayerController.instance.leftCtrlPressed)
+            quaternion = Quaternion.Euler(new Vector3(0,90,0)); //ROTATED TO HORIZONTAL
         else
-        {        GameObject obj = Instantiate(PrefabToInstantiate, position, Quaternion.identity);
-        }
+            quaternion = Quaternion.identity; // ROTATED VERTICALLY
+
+        if(!MapController.instance.CanShipBeDeployed(tile,PrefabToInstantiate.GetComponent<Ship>()))
+            return;
+        obj = Instantiate(PrefabToInstantiate, position, quaternion);
+        Ship ship = obj.GetComponent<Ship>();
+        PlayerController.instance.AddShip(ship);
     }
 
     IEnumerator Coroutine_MoveUIElement(RectTransform r , Vector2 targetPosition , float duration = 0.1f)

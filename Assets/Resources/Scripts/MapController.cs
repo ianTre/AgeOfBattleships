@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MapController : MonoBehaviour
 {
@@ -10,11 +13,20 @@ public class MapController : MonoBehaviour
     public int mapSize = 0;
     public int rowSize;
     public int columSize;
+    public static MapController instance;
+    private bool IsDragAndDroping = false;
+    private List<Tile> tilesToBeOccuppied ;
     
     //IMPORTANT: WE WILL ALWAYS FOLLOW THE PATTERN (ROW , COLUMN) , so it will be (Z , X) .
 
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
+        tilesToBeOccuppied = new List<Tile>();
         map = this.gameObject;
         MapAllTiles();
         this.rowSize = AllTiles.OrderBy(tile => tile.ZCoord).Last().ZCoord;
@@ -68,6 +80,98 @@ public class MapController : MonoBehaviour
         }
     }
 
+
+    public void TileIsBeingFocused(Tile tile)
+    {
+        if(!IsDragAndDroping)
+            tile.HighlightMainColor();
+    }
+
+    public bool CanShipBeDeployed(Tile originalTile,Ship newShip)
+    {
+        CleanTiles();
+
+        if (IsDragAndDroping)
+        {
+            if (newShip == null)
+                return false;
+        }
+
+        int sizeToBeOcuppied = newShip.Size();
+
+        int offset = 1; //1%2 == 1 . So we will increment  by [+1,-1,+2,-2,+3,-3]
+        tilesToBeOccuppied.Add(FindTileByCoord(originalTile.ZCoord, originalTile.XCoord));
+        sizeToBeOcuppied--;
+        bool plus = true;
+        offset++;
+        bool verticallyOriented = PlayerController.instance.leftCtrlPressed;
+        while (sizeToBeOcuppied > 0)
+        {
+            int auxXCoord = originalTile.XCoord;
+            int auxZCoord = originalTile.ZCoord;
+            Debug.Log("Vertcially " + verticallyOriented);
+            if (verticallyOriented)
+            {
+                if (plus)
+                {
+                    auxXCoord = originalTile.XCoord + (offset / 2);
+                }
+                else
+                {
+                    auxXCoord = originalTile.XCoord - (offset / 2);
+                }
+            }
+            else
+            {
+                if (plus)
+                {
+                    auxZCoord = originalTile.ZCoord + (offset / 2);
+                }
+                else
+                {
+                    auxZCoord = originalTile.ZCoord - (offset / 2);
+                }
+            }
+            offset++;
+            plus = !plus;
+            sizeToBeOcuppied--;
+            AddIfExists(tilesToBeOccuppied, auxZCoord, auxXCoord);
+        }
+        //Add if exists will not add any tile outside the map. If the numbers dont match , you are trying to add a ship outside longer that the limits of the map
+        if (tilesToBeOccuppied.Count != newShip.Size())
+            return false;
+
+
+        foreach (Ship ship in PlayerController.instance.ships)
+        {
+            if (ship.ocuppiedTiles.Exists(tile => tilesToBeOccuppied.Contains(tile)))
+                return false;
+        }
+
+        foreach (Tile tile in tilesToBeOccuppied)
+        {
+            tile.HighlightSecondaryColor();
+        }
+        return true;
+    }
+
+    public void CleanTiles()
+    {
+        if (tilesToBeOccuppied.Count > 0)
+        {
+            foreach (Tile tile in tilesToBeOccuppied)
+            {
+                tile.DeHighlighMe();
+            }
+            tilesToBeOccuppied.Clear();
+        }
+    }
+
+    public void SetDragAndDroping(bool boolean)
+    {
+        this.IsDragAndDroping = boolean;
+    }
+
     public List<Tile> getNeighborhoods(Tile tile)
     {
         int lowerX,higherX;
@@ -98,13 +202,26 @@ public class MapController : MonoBehaviour
 
     }
 
-    private void AddIfExists(List<Tile> neighborhoods, int z, int x)
+
+    /// <summary>
+    /// Search for a tile by coordinates and if its found it addit to the list. Be aware that Z comes first (row) and X comes second (Column)
+    /// </summary>
+    /// <param name="z"></param>
+    /// <param name="x"></param>
+    /// <returns></returns>
+    private void AddIfExists(List<Tile> list, int z, int x)
     {
         Tile tile = FindTileByCoord(z,x);
         if(tile != null)
-            neighborhoods.Add(tile);
+            list.Add(tile);
     }
 
+    /// <summary>
+    /// Search for a tile by coordinates. Be aware that Z comes first (row) and X comes second (Column). 
+    /// </summary>
+    /// <param name="z"></param>
+    /// <param name="x"></param>
+    /// <returns>Returns the tile or null if its not found</returns>
     public Tile FindTileByCoord(int z,int x)
     {
         return AllTiles.FirstOrDefault(tile => tile.XCoord == x && tile.ZCoord == z);

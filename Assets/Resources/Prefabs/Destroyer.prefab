@@ -479,8 +479,9 @@ MonoBehaviour:
   attackPoints: 0
   defencePoints: 0
   Speed: 0
-  Size: 4
   SelectedAction: 0
+  hasfocus: 0
+  shipType: 2
   ocuppiedTiles: []
 --- !u!1 &4955282738376264460
 GameObject:

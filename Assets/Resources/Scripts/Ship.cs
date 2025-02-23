@@ -9,9 +9,9 @@ public class Ship : MonoBehaviour
     public int attackPoints;
     public int defencePoints;
     public int Speed;
-    public int Size;
     public Mode SelectedAction;
     public bool hasfocus = false;
+    public ShipType shipType;
 
     public List<Tile> ocuppiedTiles;
 
@@ -30,6 +30,25 @@ public class Ship : MonoBehaviour
         }
     }
 
+    public int Size()
+    {
+        switch (shipType)
+        {
+            case ShipType.Battleship:
+                return 5;
+            case ShipType.Corvette:
+                return 2;
+            case ShipType.Crusier:
+                return 3;
+            case ShipType.Destroyer:
+                return 4;
+            case ShipType.Frigate:
+                return 3;
+            default:
+                return 1;
+        }
+    }
+
     public void RemoveOcuppiedTile(Tile tile) 
     {
         if (!ocuppiedTiles.Contains(tile))
@@ -43,13 +62,13 @@ public class Ship : MonoBehaviour
     {
       if(Input.GetKey(KeyCode.Delete) && hasfocus)
       {
-        Destroy(this);
+        PlayerController.instance.RemoveShip(this);
+        Destroy(this.gameObject);
       } 
     }
 
-    public void OnMouseEnter()
+    public void OnMouseOver()
     {
-        Debug.Log("ahsba");
         hasfocus = true;
     }
 

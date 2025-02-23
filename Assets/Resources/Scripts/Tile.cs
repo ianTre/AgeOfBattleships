@@ -34,13 +34,21 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(mapController==null)
-            mapController=FindAnyObjectByType<MapController>();
     }
 
-    public void HighlighMe(Material material)
+    private void HighlighMe(Material material)
     {
         this.meshRenderer.SetMaterials(new List<Material>{material});
+    }
+
+    public void HighlightMainColor()
+    {
+        HighlighMe(hoverMainMaterial);
+    }
+
+    public void HighlightSecondaryColor()
+    {
+        HighlighMe(hoverSecondaryMaterial);
     }
 
         public void DeHighlighMe()
@@ -53,15 +61,18 @@ public class Tile : MonoBehaviour
         if(hoverTriggered)
             return;
         hoverTriggered=true;
+        MapController.instance.TileIsBeingFocused(this);
         // Change the color of the GameObject to red when the mouse is over GameObject
-        HighlighMe(hoverMainMaterial);
-        HighlightNeighborhood();
+        //HighlightNeighborhood();
     }
+
+
+
 
     private void HighlightNeighborhood()
     {
         if(neighborhoods == null)
-            neighborhoods = mapController.getNeighborhoods(this);
+            neighborhoods = MapController.instance.getNeighborhoods(this);
         foreach (Tile nTile in neighborhoods)
         {
             nTile.HighlighMe(hoverSecondaryMaterial);
@@ -73,7 +84,7 @@ public class Tile : MonoBehaviour
         hoverTriggered=false;
         // Reset the color of the GameObject back to normal
         DeHighlighMe();
-        DeHighlightNeighborhood();
+        //DeHighlightNeighborhood();
     }
 
     private void DeHighlightNeighborhood()

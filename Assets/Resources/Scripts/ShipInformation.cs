@@ -13,5 +13,4 @@ public class ShipInformationScriptableObject : ScriptableObject
     public Sprite image;
     public int quantity;
     public string panelname;
-
 }
