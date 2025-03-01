@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Events;
+
 
 public class MapController : MonoBehaviour
 {
     GameObject map;
-    List<Tile> AllTiles = new List<Tile>();
+    public List<Tile> AllTiles = new List<Tile>();
     public int mapSize = 0;
     public int rowSize;
     public int columSize;
@@ -109,7 +107,6 @@ public class MapController : MonoBehaviour
         {
             int auxXCoord = originalTile.XCoord;
             int auxZCoord = originalTile.ZCoord;
-            Debug.Log("Vertcially " + verticallyOriented);
             if (verticallyOriented)
             {
                 if (plus)

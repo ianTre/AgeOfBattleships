@@ -88,7 +88,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             return;
         }
 
-        Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 5, tile.Zpos);
+        Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 6, tile.Zpos);
         GameObject obj;
         
         Quaternion quaternion;
