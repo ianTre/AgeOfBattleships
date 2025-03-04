@@ -63,6 +63,7 @@ public class Ship : MonoBehaviour
       {
         PlayerController.instance.RemoveShip(this);
         Destroy(this.gameObject);
+
       } 
     }
 

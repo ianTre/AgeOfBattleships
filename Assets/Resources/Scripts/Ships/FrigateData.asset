@@ -16,3 +16,4 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 1dee6b57b1f08a04fb347e459e14c646, type: 3}
   quantity: 4
   panelname: Ship4Panel
+  PrefabToInstantiate: {fileID: 7343572041723123053, guid: 5fe02c40a15733b48a48e1d201013487, type: 3}

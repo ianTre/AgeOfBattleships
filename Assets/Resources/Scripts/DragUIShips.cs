@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Numerics;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -13,13 +16,16 @@ using Vector3 = UnityEngine.Vector3;
 public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
-    [SerializeField] GameObject PrefabToInstantiate;
     [SerializeField] RectTransform UIDragElement;
     [SerializeField] RectTransform Canvas;
+    public ShipInformationScriptableObject ScriptableObject;
 
     private Vector2 mOriginalLocalPointerPosition;
     private Vector3 mOriginalPanelLocalPosition;
     private Vector2 mOriginalPosition;
+    private Color availableColor = new Color32(138,255,117,255);
+    private Color notAvailableColor = new Color32(255,51,30,255);
+
     
     // Start is called before the first frame update
     void Start() {
@@ -27,6 +33,13 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Ship ship = ScriptableObject.PrefabToInstantiate.GetComponent<Ship>();
+        if(!PlayerController.instance.CanShipBeDeployed(ship,ScriptableObject.quantity))
+        {
+            eventData.pointerDrag = null;
+            return;
+        }
+
         mOriginalPanelLocalPosition = UIDragElement.localPosition; 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(Canvas,eventData.position,eventData.pressEventCamera,out mOriginalLocalPointerPosition);
         MapController.instance.SetDragAndDroping(true);
@@ -54,7 +67,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             if(hit.collider.gameObject.tag == "WaterTile")
             {
                 Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
-                Ship ship = PrefabToInstantiate.GetComponent<Ship>();
+                Ship ship = ScriptableObject.PrefabToInstantiate.GetComponent<Ship>();
                 MapController.instance.CanShipBeDeployed(impactedTile,ship);
             }
         }
@@ -82,7 +95,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void CreateObject(Tile tile)
     {
-        if(PrefabToInstantiate == null)
+        if(ScriptableObject.PrefabToInstantiate == null)
         {
             Debug.Log("No prefab to instatiate");
             return;
@@ -97,11 +110,16 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         else
             quaternion = Quaternion.identity; // ROTATED VERTICALLY
 
-        if(!MapController.instance.CanShipBeDeployed(tile,PrefabToInstantiate.GetComponent<Ship>()))
+        if(!MapController.instance.CanShipBeDeployed(tile,ScriptableObject.PrefabToInstantiate.GetComponent<Ship>()))
             return;
-        obj = Instantiate(PrefabToInstantiate, position, quaternion);
+        obj = Instantiate(ScriptableObject.PrefabToInstantiate, position, quaternion);
         Ship ship = obj.GetComponent<Ship>();
         PlayerController.instance.AddShip(ship);
+
+        if(!PlayerController.instance.CanShipBeDeployed(ship,ScriptableObject.quantity))
+        {
+            this.transform.parent.Find("Outter").GetComponent<Image>().color = notAvailableColor;
+        }
     }
 
     IEnumerator Coroutine_MoveUIElement(RectTransform r , Vector2 targetPosition , float duration = 0.1f)
@@ -115,5 +133,10 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void EnablePanel()
+    {
+        this.transform.parent.Find("Outter").GetComponent<Image>().color = availableColor;
     }
 }

@@ -7,12 +7,14 @@ using Random = UnityEngine.Random;
 
 public class EnemyMapController : MonoBehaviour
 {
-    private int offset = 5000; 
+    private int offsetInMap = 3000; 
     public static EnemyMapController instance;
     public List<Tile> allTiles;
     GameObject enemyMap;
     GameObject EnemyShipsGO;
     public List<Ship> enemyShips;
+    [SerializeField]
+    GameObject radar;
     
     private void Awake() {
         instance = this;
@@ -24,6 +26,8 @@ public class EnemyMapController : MonoBehaviour
         enemyMap = GameObject.Find("EnemyMap");
         if(enemyMap==null || EnemyShipsGO == null)
             Debug.Log("Error at finding GameObjects in EnemyMapController. Check Start code");
+        var enemyPos = enemyMap.transform.position;
+        enemyMap.transform.position = new Vector3(enemyPos.x , enemyPos.y , enemyPos.z + offsetInMap);
     }
 
     // Update is called once per frame
@@ -36,11 +40,13 @@ public class EnemyMapController : MonoBehaviour
     {
         foreach (Tile tile in originalTiles)
         {
-            Vector3 newpos = new Vector3(tile.Xpos,tile.Ypos , tile.Zpos + offset);
+            Vector3 newpos = new Vector3(tile.Xpos,tile.Ypos , tile.Zpos + offsetInMap);
             Instantiate(tile,newpos,Quaternion.identity,enemyMap.transform);
         }
         MapAllTiles();
-    }
+        var enemyPos = enemyMap.transform.position;
+        radar.transform.position = new Vector3(enemyPos.x+225.68f,20f,enemyPos.z - 44.5f);
+     }
 
     public void MapAllTiles()
     {
