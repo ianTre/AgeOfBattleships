@@ -40,23 +40,22 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
-            Debug.Log("Ctrl pressed");
             leftCtrlPressed=!leftCtrlPressed;
         }
 
-        if(Input.GetKeyDown(KeyCode.M))
+        /*if(Input.GetKeyDown(KeyCode.M))
         {
             Debug.Log("M was pressed");
             cameraOnMain=!cameraOnMain;
             UpdateCameraPosition();
             SetAtackMode(true);
-        }
+        }*/
     }
 
-    private void SetAtackMode(bool v)
+    /*private void SetAtackMode(bool v)
     {
         AtackRadarCanvasController.instance.CreateGrid(MapController.instance.rowSize,MapController.instance.columSize);
-    }
+    }*/
 
     private void UpdateCameraPosition()
     {
@@ -75,7 +74,6 @@ public class PlayerController : MonoBehaviour
             if(tile==null)
                 return;
             newPosition = tile.transform.position;
-            Debug.Log("newPos" + newPosition);
         }
 
         CameraAnchor.transform.position = new Vector3(newPosition.x,newPosition.y,newPosition.z);
@@ -105,18 +103,31 @@ public class PlayerController : MonoBehaviour
 
     public void EndDeployStage()
     {
-        Debug.Log("End Deploy Stage");
-        List<Tile> playerTiles = MapController.instance.AllTiles;
-        EnemyMapController.instance.GenerateEnemyMap(playerTiles);
-        EnemyMapController.instance.GenerateEnemyShips(ships);
-
+        GameController.instance.UpdateStage(GameStage.PlayerAttackEnemyMap);
     }
+
+
 
     public bool CanShipBeDeployed(Ship ship,int quantity)
     {
         return ships.Where(x => x.shipType == ship.shipType).Count() < quantity;
     }
 
+    public HitResult ProcessEnemyHit(int z,int x)
+    {
+        foreach (Ship ship in ships)
+        {
+            Tile hitTile = ship.ocuppiedTiles.Find(tile => tile.ZCoord == z && tile.XCoord == x);
+            if(hitTile != null)
+            {
+                ship.TakeHit(hitTile);
+                if(ship.isSunk)
+                    return HitResult.Sunk;
+                return HitResult.Hit;
+            }
+        }
+        return HitResult.Miss;
+    }
 
 }
     

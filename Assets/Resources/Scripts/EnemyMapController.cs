@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using Input = UnityEngine.Input;
 using Random = UnityEngine.Random;
 
 public class EnemyMapController : MonoBehaviour
@@ -15,6 +17,13 @@ public class EnemyMapController : MonoBehaviour
     public List<Ship> enemyShips;
     [SerializeField]
     GameObject radar;
+    public List<Tile> enemyMapShootedTiles;
+    public Tile selectedTile;
+    [SerializeField]
+    GameObject missSprite;
+    [SerializeField]
+    GameObject hitSprite;
+    public List<Tile> PlayerMapShootedTiles;
     
     private void Awake() {
         instance = this;
@@ -28,12 +37,41 @@ public class EnemyMapController : MonoBehaviour
             Debug.Log("Error at finding GameObjects in EnemyMapController. Check Start code");
         var enemyPos = enemyMap.transform.position;
         enemyMap.transform.position = new Vector3(enemyPos.x , enemyPos.y , enemyPos.z + offsetInMap);
+        enemyMapShootedTiles = new List<Tile>();
+        PlayerMapShootedTiles = new List<Tile>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown ("return"))
+        {
+            if(selectedTile == null)
+            {
+                Debug.Log("no Selected tile");
+                return;
+            }
+            enemyMapShootedTiles.Add(selectedTile);
+            GameObject prefab = CheckSpotInMap(selectedTile);
+            Instantiate(prefab,selectedTile.transform);
+            GameController.instance.UpdateStage(GameStage.IAAttackPlayerMap);
+        }
         
+    }
+
+    public GameObject CheckSpotInMap(Tile tile)
+    {
+        Debug.Log("Checking " , tile);
+        Debug.Log("Tile x " + tile.XCoord.ToString() + "Tile Z " + tile.ZCoord.ToString());
+        foreach (Ship ship in enemyShips)
+        {
+            if(ship.ocuppiedTiles.Exists(sTile => sTile.XCoord == tile.XCoord && sTile.ZCoord == tile.ZCoord))
+            {
+                Debug.Log("Hit");
+                return hitSprite;
+            }
+        }
+        return missSprite;
     }
 
     public void GenerateEnemyMap(List<Tile> originalTiles)
@@ -109,7 +147,8 @@ public class EnemyMapController : MonoBehaviour
                     else
                         quaternion = Quaternion.identity; // ROTATED VERTICALLY
                     Vector3 newPosition= new Vector3(tile.Xpos,tile.Ypos + 6 ,tile.Zpos);
-                    Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
+                    Ship NewShip = Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
+                    enemyShips.Add(NewShip);
                     foundRightSpot = true;
                 }
 
@@ -135,6 +174,19 @@ public class EnemyMapController : MonoBehaviour
     {
         return allTiles.FirstOrDefault(tile => tile.XCoord == x && tile.ZCoord == z);
     }
+
+    public void TileIsFocus(Tile tile)
+    {
+        if(enemyMapShootedTiles.Contains(tile))
+        {
+            return;
+        }
+        selectedTile?.DeHighlighMe();
+        selectedTile = tile;
+        selectedTile.HighlightMainColor();
+    }
+
+
 
 
     public bool CanShipBeDeployed(Tile originalTile,Ship newShip,bool verticallyOriented)
@@ -193,5 +245,26 @@ public class EnemyMapController : MonoBehaviour
 
         return true;
     }
+
+    public void IAEnemyShot()
+    {
+        bool virginSpot = false;
+        int rowNumber=0;
+        int columnNumber=0;
+        while(!virginSpot)
+        {
+            rowNumber = Random.Range(0,MapController.instance.rowSize);
+            columnNumber = Random.Range(0,MapController.instance.columSize);
+            var tile = PlayerMapShootedTiles.Find(tile => tile.ZCoord == rowNumber && tile.XCoord == columnNumber);
+            if(tile != null)
+            {
+                PlayerMapShootedTiles.Add(tile);
+                virginSpot=true;
+            }
+        }
+
+        PlayerController.instance.ProcessEnemyHit(rowNumber,columnNumber);
+    }
+
 
 }

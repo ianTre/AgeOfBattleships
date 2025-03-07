@@ -58,7 +58,7 @@ public class Tile : MonoBehaviour
 
         void OnMouseOver()
     {
-        if(hoverTriggered)
+        if(hoverTriggered || GameController.instance.currentStage != GameStage.Deploy)
             return;
         hoverTriggered=true;
         MapController.instance.TileIsBeingFocused(this);
@@ -66,7 +66,13 @@ public class Tile : MonoBehaviour
         //HighlightNeighborhood();
     }
 
-
+    void OnMouseDown()
+   {
+       if(GameController.instance.currentStage == GameStage.PlayerAttackEnemyMap)
+       {
+            EnemyMapController.instance.TileIsFocus(this);
+       }
+   }
 
 
     private void HighlightNeighborhood()

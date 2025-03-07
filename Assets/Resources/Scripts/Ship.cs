@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Ship : MonoBehaviour
 {
@@ -13,12 +17,17 @@ public class Ship : MonoBehaviour
     public bool hasfocus = false;
     public ShipType shipType;
     public List<Tile> ocuppiedTiles;
+    public List<ShipTile> shipTiles;
+    public bool isSunk=false;
+    private int count=0;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         ocuppiedTiles = new List<Tile>();
+        shipTiles = new List<ShipTile>();
     }
 
     public void AddOcuppiedTile(Tile tile)
@@ -26,7 +35,14 @@ public class Ship : MonoBehaviour
         if(!ocuppiedTiles.Contains(tile)) 
         { 
             ocuppiedTiles.Add(tile);
+            shipTiles.Add(new ShipTile(tile,count++));
         }
+    }
+
+    public void TakeHit(Tile tile)
+    {
+        shipTiles.Find(x => x.tile == tile).hitted = true;
+        isSunk = shipTiles.All(x => x.hitted);
     }
 
     public int Size()
@@ -77,6 +93,20 @@ public class Ship : MonoBehaviour
         hasfocus = false;
     }
 
+}
+
+public class ShipTile
+{
+    public int tileNumber;
+    public Tile tile;
+    public bool hitted;
+    
+    public ShipTile(Tile tile , int number)
+    {
+        this.tile = tile;
+        this.hitted = false;
+        this.tileNumber = ++number;
+    }
 }
 
 public enum Mode
