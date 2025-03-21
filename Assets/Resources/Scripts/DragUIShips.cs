@@ -25,10 +25,12 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Vector2 mOriginalPosition;
     private Color availableColor = new Color32(138,255,117,255);
     private Color notAvailableColor = new Color32(255,51,30,255);
+    public ShipSoundController shipSounds; 
 
     
     // Start is called before the first frame update
     void Start() {
+        shipSounds = FindAnyObjectByType<ShipSoundController>(); 
         mOriginalPosition = UIDragElement.localPosition;
     }
     public void OnBeginDrag(PointerEventData eventData)
@@ -115,6 +117,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         obj = Instantiate(ScriptableObject.PrefabToInstantiate, position, quaternion);
         Ship ship = obj.GetComponent<Ship>();
         PlayerController.instance.AddShip(ship);
+        shipSounds.ReproduceShipDeploySound(ship);
 
         if(!PlayerController.instance.CanShipBeDeployed(ship,ScriptableObject.quantity))
         {
