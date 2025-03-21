@@ -51,8 +51,8 @@ public class GameController : MonoBehaviour
 
     public void TransitionToPlayerAttackEnemyMap()
     {
-        EndDeployStage();
         currentStage = GameStage.PlayerAttackEnemyMap;
+        EndDeployStage();
         camera1.gameObject.SetActive(false);
         camera2.gameObject.SetActive(true);
         turn++;
@@ -70,7 +70,7 @@ public class GameController : MonoBehaviour
         currentStage = GameStage.PlayerAttackCinematic;
         camera2.gameObject.SetActive(false);
         camera1.gameObject.SetActive(true);
-        EnemyMapController.instance.IAEnemyShot();
+        //EnemyMapController.instance.IAEnemyShot();
         actionStage = GameStage.PlayerAttackEnemyMap;
     }
 

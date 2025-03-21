@@ -20,7 +20,6 @@ public class Ship : MonoBehaviour
     public List<ShipTile> shipTiles;
     public bool isSunk=false;
     private int count=0;
-    
 
 
     // Start is called before the first frame update

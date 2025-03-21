@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using Input = UnityEngine.Input;
@@ -23,8 +24,15 @@ public class EnemyMapController : MonoBehaviour
     GameObject missSprite;
     [SerializeField]
     GameObject hitSprite;
-    public List<Tile> PlayerMapShootedTiles;
-    
+    public List<Tile> PlayerMapShotTiles;
+    public bool shipshotachieved = false;
+    [SerializeField]
+    List<Coord> possiblecoordHits;
+    [SerializeField]
+    List<Coord> successfulCoordHits;
+
+    private int rowNumber;
+    private int columnNumber;
     private void Awake() {
         instance = this;
     }
@@ -38,7 +46,9 @@ public class EnemyMapController : MonoBehaviour
         var enemyPos = enemyMap.transform.position;
         enemyMap.transform.position = new Vector3(enemyPos.x , enemyPos.y , enemyPos.z + offsetInMap);
         enemyMapShootedTiles = new List<Tile>();
-        PlayerMapShootedTiles = new List<Tile>();
+        PlayerMapShotTiles = new List<Tile>();
+        possiblecoordHits = new List<Coord>();
+        successfulCoordHits = new List<Coord>();
     }
 
     // Update is called once per frame
@@ -147,7 +157,7 @@ public class EnemyMapController : MonoBehaviour
                     else
                         quaternion = Quaternion.identity; // ROTATED VERTICALLY
                     Vector3 newPosition= new Vector3(tile.Xpos,tile.Ypos + 6 ,tile.Zpos);
-                    Ship NewShip = Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
+                                        Ship NewShip = Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
                     enemyShips.Add(NewShip);
                     foundRightSpot = true;
                 }
@@ -247,24 +257,115 @@ public class EnemyMapController : MonoBehaviour
     }
 
     public void IAEnemyShot()
-    {
+    {   
+        Coord coord = null;    
+        if(shipshotachieved)
+        {
+        coord = possiblecoordHits[Random.Range(0,possiblecoordHits.Count)];
+        rowNumber = coord.row;
+        columnNumber = coord.column;
+        possiblecoordHits.Remove(coord);
+        }
+        else
+        {
         bool virginSpot = false;
-        int rowNumber=0;
-        int columnNumber=0;
+               
         while(!virginSpot)
         {
             rowNumber = Random.Range(0,MapController.instance.rowSize);
             columnNumber = Random.Range(0,MapController.instance.columSize);
-            var tile = PlayerMapShootedTiles.Find(tile => tile.ZCoord == rowNumber && tile.XCoord == columnNumber);
-            if(tile != null)
+            var tile = PlayerMapShotTiles.Find(tile => tile.ZCoord == rowNumber && tile.XCoord == columnNumber);
+            if(tile == null)
             {
-                PlayerMapShootedTiles.Add(tile);
                 virginSpot=true;
             }
         }
+        }
 
-        PlayerController.instance.ProcessEnemyHit(rowNumber,columnNumber);
+       HitResult hitresult = PlayerController.instance.ProcessEnemyHit(rowNumber,columnNumber);
+       Tile newTile = MapController.instance.FindTileByCoord(rowNumber,columnNumber);
+       PlayerMapShotTiles.Add(newTile);
+
+    
+
+        if(hitresult == HitResult.Hit)
+        {
+            if(!shipshotachieved) // primera vez que se acierta
+            { 
+                AddPossibleTarget(rowNumber + 1,columnNumber);
+                AddPossibleTarget(rowNumber,columnNumber + 1);
+                AddPossibleTarget(rowNumber - 1,columnNumber);
+                AddPossibleTarget(rowNumber,columnNumber - 1); 
+                shipshotachieved = true;
+                coord = new Coord(rowNumber,columnNumber);
+                successfulCoordHits.Add(coord);
+                          Debug.Log("primera vez que se acierta");
+
+            }
+            else
+            {
+                Coord originalHit = successfulCoordHits.First();
+                int rowpossibleHit = originalHit.row - rowNumber;
+                int columnpossibleHit = originalHit.column - columnNumber;
+                successfulCoordHits.Add(coord);
+
+                possiblecoordHits.Clear();
+                          Debug.Log("una + n veces que se acierta");
+
+                if(rowpossibleHit == 0) // fila acertada por segunda vez
+                {
+                    int columnMaxNum = successfulCoordHits.Max(x => x.column) + 1;
+                    int columnMinNum = successfulCoordHits.Min(x => x.column) - 1;
+                    AddPossibleTarget(rowNumber,columnMaxNum);
+                    AddPossibleTarget(rowNumber,columnMinNum);
+                              Debug.Log("fila acertada");
+
+                }
+                else // columna acertada por segunda vez
+                {
+                    int rowMaxNum = successfulCoordHits.Max(x => x.row) + 1;
+                    int rowMinNum = successfulCoordHits.Min(x => x.row) - 1;
+                    AddPossibleTarget(rowMaxNum,columnNumber);
+                    AddPossibleTarget(rowMinNum,columnNumber);
+                              Debug.Log("Columna acertada");
+
+                }
+
+            }
+     
+        }
+           if(hitresult == HitResult.Sunk || (shipshotachieved && possiblecoordHits.Count == 0))
+       {
+          shipshotachieved = false;
+          possiblecoordHits.Clear();
+          successfulCoordHits.Clear();
+          Debug.Log("Ship has sunk");
+       }
+       
+        Debug.Log("Ship has shot Row: " + rowNumber + "and Column: " + columnNumber);
+        Debug.Log(hitresult.ToString());
+
     }
 
+    private void AddPossibleTarget(int rowNumber, int columnNumber)
+    {
+        var tile = PlayerMapShotTiles.Find(tile => tile.ZCoord == rowNumber && tile.XCoord == columnNumber);
 
+        if(MapController.instance.FindTileByCoord(rowNumber,columnNumber) == null || tile != null)
+        {
+            return;
+        }
+        possiblecoordHits.Add(new Coord(rowNumber,columnNumber));
+            
+    }
+}
+public class Coord : MonoBehaviour
+{
+    public int row;
+    public int column;
+    public Coord(int row,int column)
+    {
+        this.row = row;
+        this.column = column;
+    }
 }

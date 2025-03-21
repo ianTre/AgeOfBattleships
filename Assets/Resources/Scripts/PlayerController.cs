@@ -43,13 +43,10 @@ public class PlayerController : MonoBehaviour
             leftCtrlPressed=!leftCtrlPressed;
         }
 
-        /*if(Input.GetKeyDown(KeyCode.M))
+        if(Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log("M was pressed");
-            cameraOnMain=!cameraOnMain;
-            UpdateCameraPosition();
-            SetAtackMode(true);
-        }*/
+            EnemyMapController.instance.IAEnemyShot();
+        }
     }
 
     /*private void SetAtackMode(bool v)

@@ -118,6 +118,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         Ship ship = obj.GetComponent<Ship>();
         PlayerController.instance.AddShip(ship);
         shipSounds.ReproduceShipDeploySound(ship);
+ 
 
         if(!PlayerController.instance.CanShipBeDeployed(ship,ScriptableObject.quantity))
         {
