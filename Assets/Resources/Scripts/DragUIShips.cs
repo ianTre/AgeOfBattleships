@@ -26,10 +26,13 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Color availableColor = new Color32(138,255,117,255);
     private Color notAvailableColor = new Color32(255,51,30,255);
     public ShipSoundController shipSounds; 
-
+    public SelectionController selectionController;
+    private Tile tiletolight;
     
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
+        selectionController = FindAnyObjectByType<SelectionController>(); 
         shipSounds = FindAnyObjectByType<ShipSoundController>(); 
         mOriginalPosition = UIDragElement.localPosition;
     }
@@ -71,6 +74,8 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
                 Ship ship = ScriptableObject.PrefabToInstantiate.GetComponent<Ship>();
                 MapController.instance.CanShipBeDeployed(impactedTile,ship);
+                tiletolight = impactedTile;
+                
             }
         }
     }
@@ -86,7 +91,6 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             if(hit.collider.gameObject.tag == "WaterTile")
             {
                 Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
-
                 CreateObject(impactedTile);
             }
         }
@@ -115,10 +119,12 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if(!MapController.instance.CanShipBeDeployed(tile,ScriptableObject.PrefabToInstantiate.GetComponent<Ship>()))
             return;
         obj = Instantiate(ScriptableObject.PrefabToInstantiate, position, quaternion);
+        
         Ship ship = obj.GetComponent<Ship>();
         PlayerController.instance.AddShip(ship);
-        shipSounds.ReproduceShipDeploySound(ship);
- 
+        bool nofocusfirst= false;
+        selectionController.SelectionLightOn(tiletolight,ship,nofocusfirst);
+        shipSounds.PlayShipDeploySound(ship);
 
         if(!PlayerController.instance.CanShipBeDeployed(ship,ScriptableObject.quantity))
         {

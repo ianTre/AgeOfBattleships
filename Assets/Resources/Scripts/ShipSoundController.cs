@@ -15,6 +15,9 @@ public class ShipSoundController : MonoBehaviour
    
     [SerializeField]
     AudioClip waterSplashSound; 
+    
+    [SerializeField]
+    AudioClip shipSelectSound; 
 
 
     // Start is called before the first frame update
@@ -29,10 +32,23 @@ public class ShipSoundController : MonoBehaviour
      
     }
 
-    public void ReproduceShipDeploySound(Ship ship)
+    public void PlayShipDeploySound(Ship ship)
     {
         AudioSource audio = ship.GetComponent<AudioSource>();
         audio.clip = shipDeploySound;
+        audio.Play();
+    }
+      public void PlayShipSelectionSoundOff(Ship ship)
+    {
+        AudioSource audio = ship.GetComponent<AudioSource>();
+        audio.clip = shipDeploySound;
+        audio.Stop();
+    }
+
+     public void PlayShipSelectionSound(Ship ship)
+    {
+        AudioSource audio = ship.GetComponent<AudioSource>();
+        audio.clip = shipSelectSound;
         audio.Play();
     }
 

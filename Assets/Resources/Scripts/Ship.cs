@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
 
 public class Ship : MonoBehaviour
@@ -20,21 +22,26 @@ public class Ship : MonoBehaviour
     public List<ShipTile> shipTiles;
     public bool isSunk=false;
     private int count=0;
-
+    public SelectionController selectionlight;
+    private Tile selectedTile;
 
     // Start is called before the first frame update
     void Start()
     {
         ocuppiedTiles = new List<Tile>();
         shipTiles = new List<ShipTile>();
+        selectionlight = FindAnyObjectByType<SelectionController>(); 
+
     }
 
     public void AddOcuppiedTile(Tile tile)
     {
+
         if(!ocuppiedTiles.Contains(tile)) 
         { 
             ocuppiedTiles.Add(tile);
             shipTiles.Add(new ShipTile(tile,count++));
+            selectedTile = tile;
         }
     }
 
@@ -78,20 +85,26 @@ public class Ship : MonoBehaviour
       {
         PlayerController.instance.RemoveShip(this);
         Destroy(this.gameObject);
-
+        selectionlight.SelectionLightOff(this);
       } 
     }
 
-    public void OnMouseOver()
+    public void OnMouseDown()
     {
-        hasfocus = true;
+        if(hasfocus)
+        {
+         hasfocus = false;
+         selectionlight.SelectionLightOff(this);
+        }
+        else
+        {
+          hasfocus = true;
+          selectionlight.SelectionLightOn(selectedTile, this, hasfocus);
+        }
+
     }
 
-    public void OnMouseExit()
-    {
-        hasfocus = false;
-    }
-
+    
 }
 
 public class ShipTile
