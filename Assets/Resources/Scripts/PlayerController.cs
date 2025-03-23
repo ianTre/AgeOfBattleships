@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public bool leftCtrlPressed = false;
     public bool cameraOnMain = true;
     public Dictionary<ShipType,string> panelForShip;
+    [SerializeField]
+    GameObject explosions;
     
     // Start is called before the first frame update
 
@@ -43,10 +47,13 @@ public class PlayerController : MonoBehaviour
             leftCtrlPressed=!leftCtrlPressed;
         }
 
-        if(Input.GetKeyDown(KeyCode.P))
+        /*if(Input.GetKeyDown(KeyCode.M))
         {
-            EnemyMapController.instance.IAEnemyShot();
-        }
+            Debug.Log("M was pressed");
+            cameraOnMain=!cameraOnMain;
+            UpdateCameraPosition();
+            SetAtackMode(true);
+        }*/
     }
 
     /*private void SetAtackMode(bool v)

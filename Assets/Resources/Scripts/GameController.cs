@@ -51,6 +51,10 @@ public class GameController : MonoBehaviour
 
     public void TransitionToPlayerAttackEnemyMap()
     {
+        if(currentStage == GameStage.Deploy)
+        {
+            EndDeployStage();
+        }
         currentStage = GameStage.PlayerAttackEnemyMap;
         EndDeployStage();
         camera1.gameObject.SetActive(false);
@@ -72,6 +76,7 @@ public class GameController : MonoBehaviour
         camera1.gameObject.SetActive(true);
         //EnemyMapController.instance.IAEnemyShot();
         actionStage = GameStage.PlayerAttackEnemyMap;
+        Debug.Log("IA have shooted , now is Player turn");
     }
 
     public void EndDeployStage()

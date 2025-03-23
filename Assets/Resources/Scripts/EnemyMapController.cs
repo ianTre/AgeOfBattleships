@@ -24,6 +24,10 @@ public class EnemyMapController : MonoBehaviour
     GameObject missSprite;
     [SerializeField]
     GameObject hitSprite;
+    [SerializeField]
+    GameObject sunkSprite;
+    public List<Tile> PlayerMapShootedTiles;
+    
     public List<Tile> PlayerMapShotTiles;
     public bool shipshotachieved = false;
     [SerializeField]
@@ -64,9 +68,9 @@ public class EnemyMapController : MonoBehaviour
             enemyMapShootedTiles.Add(selectedTile);
             GameObject prefab = CheckSpotInMap(selectedTile);
             Instantiate(prefab,selectedTile.transform);
+            Debug.Log("Player has shooted, now is IA turn");
             GameController.instance.UpdateStage(GameStage.IAAttackPlayerMap);
         }
-        
     }
 
     public GameObject CheckSpotInMap(Tile tile)
@@ -75,13 +79,31 @@ public class EnemyMapController : MonoBehaviour
         Debug.Log("Tile x " + tile.XCoord.ToString() + "Tile Z " + tile.ZCoord.ToString());
         foreach (Ship ship in enemyShips)
         {
-            if(ship.ocuppiedTiles.Exists(sTile => sTile.XCoord == tile.XCoord && sTile.ZCoord == tile.ZCoord))
+            Tile hittedTile = ship.ocuppiedTiles.Find(Stile => Stile.ZCoord == tile.ZCoord && Stile.XCoord == tile.XCoord);
+            if(hittedTile != null)
             {
-                Debug.Log("Hit");
-                return hitSprite;
+                ship.TakeHit(hittedTile);
+                return ship.isSunk ? sunkSprite : hitSprite;
             }
         }
         return missSprite;
+    }
+
+    
+        public HitResult ProcessEnemyHit(int z,int x)
+    {
+        foreach (Ship ship in enemyShips)
+        {
+            Tile hitTile = ship.ocuppiedTiles.Find(tile => tile.ZCoord == z && tile.XCoord == x);
+            if(hitTile != null)
+            {
+                ship.TakeHit(hitTile);
+                if(ship.isSunk)
+                    return HitResult.Sunk;
+                return HitResult.Hit;
+            }
+        }
+        return HitResult.Miss;
     }
 
     public void GenerateEnemyMap(List<Tile> originalTiles)
