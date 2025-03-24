@@ -19,7 +19,6 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     [SerializeField] RectTransform UIDragElement;
     [SerializeField] RectTransform Canvas;
     public ShipInformationScriptableObject ScriptableObject;
-
     private Vector2 mOriginalLocalPointerPosition;
     private Vector3 mOriginalPanelLocalPosition;
     private Vector2 mOriginalPosition;
@@ -122,8 +121,6 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         
         Ship ship = obj.GetComponent<Ship>();
         PlayerController.instance.AddShip(ship);
-        bool nofocusfirst= false;
-        selectionController.SelectionLightOn(tiletolight,ship,nofocusfirst);
         shipSounds.PlayShipDeploySound(ship);
 
         if(!PlayerController.instance.CanShipBeDeployed(ship,ScriptableObject.quantity))

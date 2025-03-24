@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 public class Ship : MonoBehaviour
 {
 
-    public int HealtPoints;
+    public int HealthPoints;
     public int attackPoints;
     public int defencePoints;
     public int Speed;
@@ -23,7 +23,7 @@ public class Ship : MonoBehaviour
     public bool isSunk=false;
     private int count=0;
     public SelectionController selectionlight;
-    private Tile selectedTile;
+    public Tile selectedTile;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,6 @@ public class Ship : MonoBehaviour
         ocuppiedTiles = new List<Tile>();
         shipTiles = new List<ShipTile>();
         selectionlight = FindAnyObjectByType<SelectionController>(); 
-
     }
 
     public void AddOcuppiedTile(Tile tile)
@@ -81,16 +80,17 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(Input.GetKey(KeyCode.Delete) && hasfocus)
+      
+        if(Input.GetKey(KeyCode.Delete) && hasfocus)
       {
         PlayerController.instance.RemoveShip(this);
         Destroy(this.gameObject);
         selectionlight.SelectionLightOff(this);
-      } 
+      }
     }
 
     public void OnMouseDown()
-    {
+    {          
         if(hasfocus)
         {
          hasfocus = false;
@@ -99,12 +99,9 @@ public class Ship : MonoBehaviour
         else
         {
           hasfocus = true;
-          selectionlight.SelectionLightOn(selectedTile, this, hasfocus);
+          selectionlight.SelectionLightOn(selectedTile, this);
         }
-
     }
-
-    
 }
 
 public class ShipTile

@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public Dictionary<ShipType,string> panelForShip;
     [SerializeField]
     GameObject explosions;
+    private int shipCount;
+    private int totalShipAvailable = 12;
     
     // Start is called before the first frame update
 
@@ -86,6 +88,8 @@ public class PlayerController : MonoBehaviour
     public void AddShip(Ship ship)
     {
         this.ships.Add(ship);
+        shipCount++;
+        Debug.Log(shipCount);
     }
 
     public void RemoveShip(Ship ship)
@@ -94,6 +98,8 @@ public class PlayerController : MonoBehaviour
             return;
         
         ships.Remove(ship);
+        shipCount--;
+        Debug.Log(shipCount);
         string panelName = panelForShip[ship.shipType];
         GameObject shipPanel = GameObject.Find(panelName);
         if(shipPanel == null)
@@ -107,7 +113,14 @@ public class PlayerController : MonoBehaviour
 
     public void EndDeployStage()
     {
-        GameController.instance.UpdateStage(GameStage.PlayerAttackEnemyMap);
+        if(totalShipAvailable == shipCount)
+        {
+            GameController.instance.UpdateStage(GameStage.PlayerAttackEnemyMap);
+        }
+        else
+        {
+            Debug.Log("You must deploy all ships");
+        }
     }
 
 
