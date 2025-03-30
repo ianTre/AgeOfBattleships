@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,17 +53,11 @@ public class ShipSoundController : MonoBehaviour
         audio.Play();
     }
 
-    /*public void ReproduceShootingSound(Ship ship)
+    public void PlayExplosionSound(Ship ship)
     {
-        shipDeploySound.Play();
+        AudioSource audio = ship.GetComponent<AudioSource>();
+        audio.clip = shipShootingSound;
+        audio.Play();  
     }
-
-    public void ReproduceWaterSplashSound(Ship ship)
-    {
-        shipDeploySound.Play();
-    }
-
-
-*/
 }
 

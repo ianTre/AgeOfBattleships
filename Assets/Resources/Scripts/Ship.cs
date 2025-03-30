@@ -25,6 +25,7 @@ public class Ship : MonoBehaviour
     public SelectionController selectionlight;
     public double coord = 0;
     public Tile selectedTile;
+    public ExplosionController explosionController;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class Ship : MonoBehaviour
         ocuppiedTiles = new List<Tile>();
         shipTiles = new List<ShipTile>();
         selectionlight = FindAnyObjectByType<SelectionController>();
+        explosionController = FindAnyObjectByType<ExplosionController>();
        
     }
 
@@ -44,7 +46,6 @@ public class Ship : MonoBehaviour
             shipTiles.Add(new ShipTile(tile,count++));
             selectedTile = tile;
             coord = ocuppiedTiles.Average(x => x.ZCoord);
-            Debug.Log("Coord: " + coord);
         }
     }
 
@@ -92,9 +93,13 @@ public class Ship : MonoBehaviour
         selectionlight.SelectionLightOff(this);
       }
         
-        if(Input.GetKey(KeyCode.S) && hasfocus)
+        if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
       {
-        PlayerController.instance.ShowExplosion(this.selectedTile.XCoord, this.selectedTile.ZCoord);
+        explosionController.ShowExplosion(this, "down");
+      }
+      if(Input.GetKeyUp(KeyCode.Space) && hasfocus)
+      {
+        explosionController.ShowExplosion(this, "up");
       }
     }
 

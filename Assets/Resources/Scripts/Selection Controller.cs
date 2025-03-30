@@ -28,9 +28,18 @@ public class SelectionController : MonoBehaviour
     {
     }
 
+    public void SelectionLightOff(Ship ship)
+    {
+     shipSounds.PlayShipSelectionSoundOff(ship);
+     GameObject selectionlight = GameObject.Find("SelectionLight");
+     selectionlight.GetComponent<Light>().enabled = false;
+    }
+
     public void SelectionLightOn(double coord, Tile selectedTile, Ship ship)
     {      
        float coordZ = (float)coord;
+       coordZ = CorrectZpos(coordZ);
+       shipSounds.PlayShipSelectionSound(ship);
        GameObject selectionlight = GameObject.Find("SelectionLight");
        selectionlight.GetComponent<Light>().enabled = true;
        selectionlight.transform.position = new Vector3(selectedTile.Xpos,31, coordZ);
@@ -65,11 +74,6 @@ public class SelectionController : MonoBehaviour
         }
     }
 
-    public void SelectionLightOff(Ship ship)
-    {
-     shipSounds.PlayShipSelectionSoundOff(ship);
-     GameObject selectionlight = GameObject.Find("SelectionLight");
-     selectionlight.GetComponent<Light>().enabled = false;
-    }
+
 
 }

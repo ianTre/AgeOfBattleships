@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WaterTile
   - Ship
+  - Explosions
   layers:
   - Default
   - TransparentFX

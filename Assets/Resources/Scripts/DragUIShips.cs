@@ -26,7 +26,6 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private Color notAvailableColor = new Color32(255,51,30,255);
     public ShipSoundController shipSounds; 
     public SelectionController selectionController;
-    private Tile tiletolight;
     
     // Start is called before the first frame update
     void Start()
@@ -72,9 +71,7 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 Tile impactedTile = hit.collider.gameObject.GetComponent<Tile>();
                 Ship ship = ScriptableObject.PrefabToInstantiate.GetComponent<Ship>();
-                MapController.instance.CanShipBeDeployed(impactedTile,ship);
-                tiletolight = impactedTile;
-                
+                MapController.instance.CanShipBeDeployed(impactedTile,ship);                
             }
         }
     }

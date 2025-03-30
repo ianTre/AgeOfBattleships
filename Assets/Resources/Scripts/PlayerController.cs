@@ -144,12 +144,7 @@ public class PlayerController : MonoBehaviour
         return HitResult.Miss;
     }
 
-    public void ShowExplosion(int z, int x)
-    {
-        GameObject explosion = Instantiate(explosions, new Vector3(x, 0.5f, z), Quaternion.identity);
-        explosion.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        Destroy(explosion, 1500f);
-    }
+
 
 }
     
