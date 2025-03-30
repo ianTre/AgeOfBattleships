@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
     public bool cameraOnMain = true;
     public Dictionary<ShipType,string> panelForShip;
     [SerializeField]
-    GameObject explosions;
-    private int shipCount;
-    private int totalShipAvailable = 12;
+    GameObject explosions; 
+    private int shipCount; 
+    private int totalShipAvailable = 1;  // Total number of ships available for deployment
     
     // Start is called before the first frame update
 
@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
     {
         this.ships.Add(ship);
         shipCount++;
-        Debug.Log(shipCount);
     }
 
     public void RemoveShip(Ship ship)
@@ -99,7 +98,6 @@ public class PlayerController : MonoBehaviour
         
         ships.Remove(ship);
         shipCount--;
-        Debug.Log(shipCount);
         string panelName = panelForShip[ship.shipType];
         GameObject shipPanel = GameObject.Find(panelName);
         if(shipPanel == null)
@@ -144,6 +142,13 @@ public class PlayerController : MonoBehaviour
             }
         }
         return HitResult.Miss;
+    }
+
+    public void ShowExplosion(int z, int x)
+    {
+        GameObject explosion = Instantiate(explosions, new Vector3(x, 0.5f, z), Quaternion.identity);
+        explosion.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        Destroy(explosion, 1500f);
     }
 
 }

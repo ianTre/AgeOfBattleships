@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +28,43 @@ public class SelectionController : MonoBehaviour
     {
     }
 
-    public void SelectionLightOn(Tile tile, Ship ship)
+    public void SelectionLightOn(double coord, Tile selectedTile, Ship ship)
     {      
+       float coordZ = (float)coord;
        GameObject selectionlight = GameObject.Find("SelectionLight");
        selectionlight.GetComponent<Light>().enabled = true;
-       selectionlight.transform.position = new Vector3(tile.Xpos,31, tile.Zpos);
+       selectionlight.transform.position = new Vector3(selectedTile.Xpos,31, coordZ);
     }
-     
+
+    private float CorrectZpos(float coordZ)
+    {
+        switch (coordZ)
+        {
+            case 0:
+                return 90f;
+            case 1:
+                return 60f;
+            case 2:
+                return 30f;
+            case 3:
+                return 0f;
+            case 4:
+                return -30f;
+            case 5:
+                return -60;
+            case 6:
+                return -90f;
+            case 7:
+                return -120f;
+            case 8:
+                return -150f;
+            case 9:
+                return -180f;
+            default:
+                return coordZ;
+        }
+    }
+
     public void SelectionLightOff(Ship ship)
     {
      shipSounds.PlayShipSelectionSoundOff(ship);

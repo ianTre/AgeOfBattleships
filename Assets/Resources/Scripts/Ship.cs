@@ -23,6 +23,7 @@ public class Ship : MonoBehaviour
     public bool isSunk=false;
     private int count=0;
     public SelectionController selectionlight;
+    public double coord = 0;
     public Tile selectedTile;
 
     // Start is called before the first frame update
@@ -30,7 +31,8 @@ public class Ship : MonoBehaviour
     {
         ocuppiedTiles = new List<Tile>();
         shipTiles = new List<ShipTile>();
-        selectionlight = FindAnyObjectByType<SelectionController>(); 
+        selectionlight = FindAnyObjectByType<SelectionController>();
+       
     }
 
     public void AddOcuppiedTile(Tile tile)
@@ -41,6 +43,8 @@ public class Ship : MonoBehaviour
             ocuppiedTiles.Add(tile);
             shipTiles.Add(new ShipTile(tile,count++));
             selectedTile = tile;
+            coord = ocuppiedTiles.Average(x => x.ZCoord);
+            Debug.Log("Coord: " + coord);
         }
     }
 
@@ -87,6 +91,11 @@ public class Ship : MonoBehaviour
         Destroy(this.gameObject);
         selectionlight.SelectionLightOff(this);
       }
+        
+        if(Input.GetKey(KeyCode.S) && hasfocus)
+      {
+        PlayerController.instance.ShowExplosion(this.selectedTile.XCoord, this.selectedTile.ZCoord);
+      }
     }
 
     public void OnMouseDown()
@@ -99,7 +108,7 @@ public class Ship : MonoBehaviour
         else
         {
           hasfocus = true;
-          selectionlight.SelectionLightOn(selectedTile, this);
+          selectionlight.SelectionLightOn(coord, selectedTile, this); 
         }
     }
 }
