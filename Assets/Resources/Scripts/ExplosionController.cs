@@ -34,12 +34,12 @@ public class ExplosionController : MonoBehaviour
     {
         if(key == "down")
         {
-        MoveCannonforward(ship);     
-        shipSounds.PlayExplosionSound(ship);
+            MoveCannonforward(ship);     
+            shipSounds.PlayExplosionSound(ship);
         }
         else
         {
-        MoveCannonbackward(ship);     
+            MoveCannonbackward(ship);     
         }
     }
 

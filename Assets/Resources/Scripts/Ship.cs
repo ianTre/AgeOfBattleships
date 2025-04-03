@@ -39,7 +39,6 @@ public class Ship : MonoBehaviour
 
     public void AddOcuppiedTile(Tile tile)
     {
-
         if(!ocuppiedTiles.Contains(tile)) 
         { 
             ocuppiedTiles.Add(tile);
