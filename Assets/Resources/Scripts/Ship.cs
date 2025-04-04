@@ -34,12 +34,10 @@ public class Ship : MonoBehaviour
         shipTiles = new List<ShipTile>();
         selectionlight = FindAnyObjectByType<SelectionController>();
         explosionController = FindAnyObjectByType<ExplosionController>();
-       
     }
 
     public void AddOcuppiedTile(Tile tile)
     {
-
         if(!ocuppiedTiles.Contains(tile)) 
         { 
             ocuppiedTiles.Add(tile);
@@ -86,17 +84,18 @@ public class Ship : MonoBehaviour
     void Update()
     {
       
-        if(Input.GetKey(KeyCode.Delete) && hasfocus)
+      if(Input.GetKey(KeyCode.Delete) && hasfocus)
       {
         PlayerController.instance.RemoveShip(this);
         Destroy(this.gameObject);
         selectionlight.SelectionLightOff(this);
       }
         
-        if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
+      if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
       {
         explosionController.ShowExplosion(this, "down");
       }
+
       if(Input.GetKeyUp(KeyCode.Space) && hasfocus)
       {
         explosionController.ShowExplosion(this, "up");
@@ -116,6 +115,7 @@ public class Ship : MonoBehaviour
           selectionlight.SelectionLightOn(coord, selectedTile, this); 
         }
     }
+    
 }
 
 public class ShipTile
