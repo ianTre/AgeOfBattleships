@@ -68,15 +68,13 @@ public class EnemyMapController : MonoBehaviour
             enemyMapShootedTiles.Add(selectedTile);
             GameObject prefab = CheckSpotInMap(selectedTile);
             Instantiate(prefab,selectedTile.transform);
+            GameController.instance.UpdateStage(GameStage.PlayerAttackCinematic);
             Debug.Log("Player has shooted, now is IA turn");
-            GameController.instance.UpdateStage(GameStage.IAAttackPlayerMap);
         }
     }
 
     public GameObject CheckSpotInMap(Tile tile)
     {
-        Debug.Log("Checking " , tile);
-        Debug.Log("Tile x " + tile.XCoord.ToString() + "Tile Z " + tile.ZCoord.ToString());
         foreach (Ship ship in enemyShips)
         {
             Tile hittedTile = ship.ocuppiedTiles.Find(Stile => Stile.ZCoord == tile.ZCoord && Stile.XCoord == tile.XCoord);
@@ -305,6 +303,7 @@ public class EnemyMapController : MonoBehaviour
         }
 
        HitResult hitresult = PlayerController.instance.ProcessEnemyHit(rowNumber,columnNumber);
+       Debug.Log("IA have shooted , now is Player turn");
        Tile newTile = MapController.instance.FindTileByCoord(rowNumber,columnNumber);
        PlayerMapShotTiles.Add(newTile);
 
@@ -321,8 +320,6 @@ public class EnemyMapController : MonoBehaviour
                 shipshotachieved = true;
                 coord = new Coord(rowNumber,columnNumber);
                 successfulCoordHits.Add(coord);
-                          Debug.Log("primera vez que se acierta");
-
             }
             else
             {
@@ -332,7 +329,6 @@ public class EnemyMapController : MonoBehaviour
                 successfulCoordHits.Add(coord);
 
                 possiblecoordHits.Clear();
-                          Debug.Log("una + n veces que se acierta");
 
                 if(rowpossibleHit == 0) // fila acertada por segunda vez
                 {
@@ -340,8 +336,6 @@ public class EnemyMapController : MonoBehaviour
                     int columnMinNum = successfulCoordHits.Min(x => x.column) - 1;
                     AddPossibleTarget(rowNumber,columnMaxNum);
                     AddPossibleTarget(rowNumber,columnMinNum);
-                              Debug.Log("fila acertada");
-
                 }
                 else // columna acertada por segunda vez
                 {
@@ -349,8 +343,6 @@ public class EnemyMapController : MonoBehaviour
                     int rowMinNum = successfulCoordHits.Min(x => x.row) - 1;
                     AddPossibleTarget(rowMaxNum,columnNumber);
                     AddPossibleTarget(rowMinNum,columnNumber);
-                              Debug.Log("Columna acertada");
-
                 }
 
             }
@@ -361,10 +353,7 @@ public class EnemyMapController : MonoBehaviour
           shipshotachieved = false;
           possiblecoordHits.Clear();
           successfulCoordHits.Clear();
-          Debug.Log("Ship has sunk");
        }
-       
-        Debug.Log("Ship has shot Row: " + rowNumber + "and Column: " + columnNumber);
         Debug.Log(hitresult.ToString());
 
     }
@@ -379,6 +368,11 @@ public class EnemyMapController : MonoBehaviour
         }
         possiblecoordHits.Add(new Coord(rowNumber,columnNumber));
             
+    }
+
+    internal bool CheckEndOfGame()
+    {
+        return enemyShips.All(s => s.isSunk);
     }
 }
 public class Coord : MonoBehaviour

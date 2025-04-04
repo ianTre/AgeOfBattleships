@@ -56,7 +56,6 @@ public class GameController : MonoBehaviour
             EndDeployStage();
         }
         currentStage = GameStage.PlayerAttackEnemyMap;
-        EndDeployStage();
         camera1.gameObject.SetActive(false);
         camera2.gameObject.SetActive(true);
         turn++;
@@ -65,18 +64,30 @@ public class GameController : MonoBehaviour
     public void TransitionToPlayerAttackCinematic()
     {
         currentStage = GameStage.PlayerAttackCinematic;
-        camera2.gameObject.SetActive(false);
-        camera1.gameObject.SetActive(true);
+        if(EnemyMapController.instance.CheckEndOfGame())
+        {
+            actionStage = GameStage.EndOfGame;
+            EndOfGame("Player");
+        }
+        else
+        {
+            actionStage = GameStage.IAAttackPlayerMap;
+        }
     }
 
     public void TransitionToIAAttack()
     {
-        currentStage = GameStage.PlayerAttackCinematic;
+        currentStage = GameStage.IAAttackPlayerMap;
         camera2.gameObject.SetActive(false);
         camera1.gameObject.SetActive(true);
-        //EnemyMapController.instance.IAEnemyShot();
-        actionStage = GameStage.PlayerAttackEnemyMap;
-        Debug.Log("IA have shooted , now is Player turn");
+        EnemyMapController.instance.IAEnemyShot();
+        if(PlayerController.instance.CheckEndOfGame())
+        {
+            actionStage = GameStage.EndOfGame;
+            EndOfGame("IA");
+        }
+        else
+            actionStage = GameStage.PlayerAttackEnemyMap;
     }
 
     public void EndDeployStage()
@@ -85,7 +96,25 @@ public class GameController : MonoBehaviour
         List<Tile> playerTiles = MapController.instance.AllTiles;
         EnemyMapController.instance.GenerateEnemyMap(playerTiles);
         List<Ship> ships = PlayerController.instance.ships;
+        GameObject.Find("InitialSetupCanvas").SetActive(false);
         EnemyMapController.instance.GenerateEnemyShips(ships);
+    }
+
+    public void EndOfGame(string winner)
+    {
+        currentStage = GameStage.EndOfGame;
+        camera1.gameObject.SetActive(false);
+        camera2.gameObject.SetActive(false);
+        Debug.Log("End of Game: " + winner + " wins!");
+        // Show end game panel
+        /*GameObject endGamePanel = GameObject.Find("EndGamePanel");
+        if(endGamePanel == null)
+        {
+            Debug.Log("Error: EndGamePanel not found, check EndOfGame on GameController");
+            return;
+        }
+        endGamePanel.SetActive(true);
+        endGamePanel.transform.Find("Winner").GetComponent<UnityEngine.UI.Text>().text = winner;*/
     }
 
     public void UpdateStage(GameStage nextStage)
