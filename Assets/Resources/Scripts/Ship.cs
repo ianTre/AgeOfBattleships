@@ -26,6 +26,7 @@ public class Ship : MonoBehaviour
     public double coord = 0;
     public Tile selectedTile;
     public ExplosionController explosionController;
+    private FirePowerController firePowerController;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class Ship : MonoBehaviour
         shipTiles = new List<ShipTile>();
         selectionlight = FindAnyObjectByType<SelectionController>();
         explosionController = FindAnyObjectByType<ExplosionController>();
-       
+        firePowerController = GetComponent<FirePowerController>();
     }
 
     public void AddOcuppiedTile(Tile tile)
@@ -84,22 +85,18 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
         if(Input.GetKey(KeyCode.Delete) && hasfocus)
-      {
-        PlayerController.instance.RemoveShip(this);
-        Destroy(this.gameObject);
-        selectionlight.SelectionLightOff(this);
-      }
+        {
+            PlayerController.instance.RemoveShip(this);
+            Destroy(this.gameObject);
+            selectionlight.SelectionLightOff(this);
+        }
         
         if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
-      {
-        explosionController.ShowExplosion(this, "down");
-      }
-      if(Input.GetKeyUp(KeyCode.Space) && hasfocus)
-      {
-        explosionController.ShowExplosion(this, "up");
-      }
+        {
+            Debug.Log("Fire!");
+            firePowerController.FireCannons();
+        }
     }
 
     public void OnMouseDown()
