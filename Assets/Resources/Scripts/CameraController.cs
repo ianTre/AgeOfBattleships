@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
         if(!DeveloperMode)
             cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "Water", "UI");
         else
-            cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "UI");
+            cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "UI","Developer");
 
         //ZOOM
         curZoom += Input.GetAxis("Mouse ScrollWheel") * -zoomSpeed;

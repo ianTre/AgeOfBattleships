@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 1094773281188578903}
   - component: {fileID: 4471239644302973818}
   m_Layer: 0
-  m_Name: Small Turret
+  m_Name: Medium Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c176c07169cfe6498d323907b844bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealtPoints: 0
+  HealthPoints: 0
   attackPoints: 0
   defencePoints: 0
   Speed: 0
@@ -497,7 +497,10 @@ MonoBehaviour:
   shipType: 4
   ocuppiedTiles: []
   isSunk: 0
-  isEnemy: 0
+  selectionlight: {fileID: 0}
+  coord: 0
+  selectedTile: {fileID: 0}
+  explosionController: {fileID: 0}
 --- !u!82 &1038894041495877675
 AudioSource:
   m_ObjectHideFlags: 0
@@ -712,7 +715,7 @@ GameObject:
   - component: {fileID: 4132771964111478440}
   - component: {fileID: 6340278801793813925}
   m_Layer: 0
-  m_Name: Small Turret
+  m_Name: Medium Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
