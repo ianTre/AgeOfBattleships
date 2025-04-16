@@ -112,7 +112,6 @@ public class Ship : MonoBehaviour
         }
     }
 
-   
 
     public void OnMouseDown()
     {          
@@ -127,6 +126,7 @@ public class Ship : MonoBehaviour
           selectionlight.SelectionLightOn(coord, selectedTile, this); 
         }
     }
+    
 }
 
 public class ShipTile

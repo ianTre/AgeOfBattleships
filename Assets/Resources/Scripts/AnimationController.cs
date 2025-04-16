@@ -129,7 +129,7 @@ public class AnimationController : MonoBehaviour
                 yield return null;
             }
             GameObject explosion = Instantiate(HitExplosion, position, Quaternion.identity);
-            explosion.transform.localScale = new Vector3(explosion.transform.localScale.x * 2, explosion.transform.localScale.y * 2, explosion.transform.localScale.z * 2);
+            explosion.transform.localScale = new Vector3(explosion.transform.localScale.x / 2, explosion.transform.localScale.y / 2, explosion.transform.localScale.z / 2);
             explosion.GetComponent<ParticleSystem>().Play();
             cameraRotatorFull.GetComponentInChildren<AudioSource>().clip = BombExplosion;    
             cameraRotatorFull.GetComponentInChildren<AudioSource>().Play();

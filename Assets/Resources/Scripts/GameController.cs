@@ -139,14 +139,14 @@ public class GameController : MonoBehaviour
         camera2.gameObject.SetActive(false);
         Debug.Log("End of Game: " + winner + " wins!");
         // Show end game panel
-        /*GameObject endGamePanel = GameObject.Find("EndGamePanel");
+        GameObject endGamePanel = GameObject.Find("EndGamePanel");
         if(endGamePanel == null)
         {
             Debug.Log("Error: EndGamePanel not found, check EndOfGame on GameController");
             return;
         }
         endGamePanel.SetActive(true);
-        endGamePanel.transform.Find("Winner").GetComponent<UnityEngine.UI.Text>().text = winner;*/
+        endGamePanel.transform.Find("Winner").GetComponent<UnityEngine.UI.Text>().text = winner;
     }
 
     public void UpdateStage(GameStage nextStage)
