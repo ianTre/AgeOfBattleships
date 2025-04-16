@@ -28,6 +28,7 @@ public class Ship : MonoBehaviour
     public ExplosionController explosionController;
     private FirePowerController firePowerController;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,30 @@ public class Ship : MonoBehaviour
         selectionlight = FindAnyObjectByType<SelectionController>();
         explosionController = FindAnyObjectByType<ExplosionController>();
         firePowerController = GetComponent<FirePowerController>();
+    }
+
+     // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.Delete) && hasfocus)
+        {
+            PlayerController.instance.RemoveShip(this);
+            Destroy(this.gameObject);
+            selectionlight.SelectionLightOff(this);
+        }
+        /*
+        if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
+        {
+            Debug.Log("Fire!");
+            firePowerController.FireCannons();
+        }*/
+
+        if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
+        {
+            Debug.Log("OUCHH!");
+            Tile myTile = shipTiles.First(x => x.hitted == false).tile;
+            TakeHit(myTile);
+        }
     }
 
     public void AddOcuppiedTile(Tile tile)
@@ -54,6 +79,11 @@ public class Ship : MonoBehaviour
         shipTiles.Find(x => x.tile == tile).hitted = true;
         isSunk = shipTiles.All(x => x.hitted);
     }
+
+
+
+
+
 
     public int Size()
     {
@@ -82,22 +112,7 @@ public class Ship : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKey(KeyCode.Delete) && hasfocus)
-        {
-            PlayerController.instance.RemoveShip(this);
-            Destroy(this.gameObject);
-            selectionlight.SelectionLightOff(this);
-        }
-        
-        if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
-        {
-            Debug.Log("Fire!");
-            firePowerController.FireCannons();
-        }
-    }
+   
 
     public void OnMouseDown()
     {          
@@ -125,6 +140,7 @@ public class ShipTile
         this.tile = tile;
         this.hitted = false;
         this.tileNumber = ++number;
+        Debug.Log("Tile number: " + tileNumber + "is tile: " + tile.name);
     }
 }
 

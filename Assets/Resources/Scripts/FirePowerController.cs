@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FirePowerController : MonoBehaviour
 {
     public List<GameObject> cannons;
     private Ship ship;
     public ShipSoundController shipSounds;
+    public bool isFiring = false;
+    public List<GameObject> fireSpots;
     void Start()
     {
         ship = GetComponent<Ship>();
@@ -22,12 +27,12 @@ public class FirePowerController : MonoBehaviour
 
     public void FireCannons()
     {
-        CameraRotator.instance.StartRotation(transform.position);
         StartCoroutine(FireSubRoutine());
     }
 
     private IEnumerator FireSubRoutine()
     {
+        isFiring = true;
         foreach (var cannon in cannons)
         {
             var explosion = cannon.GetComponentInChildren<ParticleSystem>();
@@ -44,7 +49,7 @@ public class FirePowerController : MonoBehaviour
             yield return new WaitForSeconds(1.5f); // Adjust the delay as needed
 
         }
-        CameraRotator.instance.StopRotation();
+        isFiring = false;
     }
 
     private void MoveCannonBackAndforward(Transform cannon)
@@ -73,5 +78,62 @@ public class FirePowerController : MonoBehaviour
         }
         cannon.transform.localPosition = start;
     }
+    public void TakeDamage(int totalHits, int totalSizeOfShip)
+    {
+        if(totalHits == totalSizeOfShip)
+        {
+            //Ship is sunk
+            //REMOVE THIS AFTER TESTS
+            Destroy(this.gameObject);
+            //REMOVE THIS AFTER TESTS
+            Debug.Log("Ship is sunk");
+        }
+        
+        if (totalSizeOfShip - totalHits == 1)
+        {
+            //Ship is one hit away from sinking
+            //Play all fire animations and double size of fire
+            var scale =fireSpots[0].transform.localScale;
+            var newScale = new Vector3(scale.x * 2, scale.y * 2, scale.z * 2);
+            foreach (var spot in fireSpots)
+            {
+                spot.transform.localScale = newScale;
+                spot.GetComponent<ParticleSystem>().Play();
+            }
+        }
 
+        if (totalSizeOfShip - totalHits == 2)
+        {
+            //Ship is two hits away from sinking
+            //Play all fire animations
+            foreach (var spot in fireSpots)
+            {
+                spot.GetComponent<ParticleSystem>().Play();
+            }
+        }
+
+        if (totalSizeOfShip - totalHits == 3)
+        {
+            //Ship is Three hits away from sinking
+            //Play half of fire animations
+            int halfFire = fireSpots.Count / 2;
+            for (int i = 0; i < halfFire; i++)
+            {
+                fireSpots[i].GetComponent<ParticleSystem>().Play();
+            }
+        }
+
+        if (totalSizeOfShip - totalHits == 4)
+        {
+            //Ship is Three hits away from sinking
+            //Play 25% of fire animations
+            int halfFire = fireSpots.Count / 4;
+            for (int i = 0; i < halfFire; i++)
+            {
+                fireSpots[i].GetComponent<ParticleSystem>().Play();
+            }
+        }
+        
+
+    }
 }

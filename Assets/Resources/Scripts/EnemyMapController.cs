@@ -69,8 +69,20 @@ public class EnemyMapController : MonoBehaviour
             GameObject prefab = CheckSpotInMap(selectedTile);
             Instantiate(prefab,selectedTile.transform);
             GameController.instance.UpdateStage(GameStage.PlayerAttackCinematic);
-            Debug.Log("Player has shooted, now is IA turn");
+            Debug.Log("Player has shooted, now is time to cinematic");
         }
+    }
+
+    IEnumerator ShowPlayerShotResultInEnemyMap(GameObject prefab)
+    {
+        float timeToWait = 1f;
+        float elapsed = 0f;
+        while(elapsed < timeToWait)
+        {
+            elapsed += Time.deltaTime;
+            yield return new WaitForSeconds(timeToWait);
+        }
+        
     }
 
     public GameObject CheckSpotInMap(Tile tile)

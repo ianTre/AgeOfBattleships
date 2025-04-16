@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject explosions; 
     private int shipCount; 
-    private int totalShipAvailable = 3;  // Total number of ships available for deployment
+    private int totalShipAvailable = 10;  // Total number of ships available for deployment
     
     // Start is called before the first frame update
 
@@ -130,13 +130,38 @@ public class PlayerController : MonoBehaviour
 
     public HitResult ProcessEnemyHit(int z,int x)
     {
+        HitResult hitResult = GetHitResult(z, x);
+        Tile tile = MapController.instance.FindTileByCoord(z,x);
+        if(tile == null)
+        {
+            Debug.Log("Error: tile not found, check ShowExplosionAnimation on PlayerController");
+        }
+        AnimationController.instance.SetNextExplosion(tile.transform.position,hitResult);
+        return hitResult;
+    }
+
+    public Ship GetShipByPosition(Vector3 position)
+    {
+        foreach (Ship ship in ships)
+        {
+            if (ship.ocuppiedTiles.Any(tile => tile.transform.position.x == position.x && tile.transform.position.z == position.z))
+            {
+                return ship;
+            }
+        }
+        return null;
+    }
+
+
+    private HitResult GetHitResult(int z, int x)
+    {
         foreach (Ship ship in ships)
         {
             Tile hitTile = ship.ocuppiedTiles.Find(tile => tile.ZCoord == z && tile.XCoord == x);
-            if(hitTile != null)
+            if (hitTile != null)
             {
                 ship.TakeHit(hitTile);
-                if(ship.isSunk)
+                if (ship.isSunk)
                     return HitResult.Sunk;
                 return HitResult.Hit;
             }
@@ -149,8 +174,13 @@ public class PlayerController : MonoBehaviour
         return ships.All(s => s.isSunk);
     }
 
-
-
+    public Ship getShipToBeActioned()
+    {
+        var avaibleShips = ships.Where(s => s.isSunk == false);
+        int random = UnityEngine.Random.Range(0, avaibleShips.Count());
+        Ship selShip = avaibleShips.ElementAt(random);
+        return selShip;
+    }
 }
     
     

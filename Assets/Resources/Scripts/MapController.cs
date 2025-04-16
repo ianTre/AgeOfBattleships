@@ -97,7 +97,7 @@ public class MapController : MonoBehaviour
 
         int sizeToBeOcuppied = newShip.Size();
 
-        int offset = 1; //1%2 == 1 . So we will increment  by [+1,-1,+2,-2,+3,-3]
+        int offset = 1; //1/2 == 1 . So we will increment  by [+1,-1,+2,-2,+3,-3]
         tilesToBeOccuppied.Add(FindTileByCoord(originalTile.ZCoord, originalTile.XCoord));
         sizeToBeOcuppied--;
         bool plus = true;
