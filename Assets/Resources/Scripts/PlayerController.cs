@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject explosions; 
     private int shipCount; 
-    private int totalShipAvailable = 10;  // Total number of ships available for deployment
+    private int totalShipAvailable = 5;  // Total number of ships available for deployment
     
     // Start is called before the first frame update
 
