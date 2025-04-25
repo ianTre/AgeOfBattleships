@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     Camera camera3;
     [SerializeField]
     Camera camera4;
+    [SerializeField]
+    GameObject endGameCanvas;
     List<string> coordinates = new List<string>();
 
     private Ship shipToAction;
@@ -44,8 +46,15 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
-    void Update()
+    void Update() 
     {
+        //BORRAR ABAJO
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            EndOfGame("German");
+        }
+        //BORRAR ARRIBA
+
         if(actionStage == currentStage)
             return;
         
@@ -150,18 +159,25 @@ public class GameController : MonoBehaviour
     public void EndOfGame(string winner)
     {
         currentStage = GameStage.EndOfGame;
-        camera1.gameObject.SetActive(false);
-        camera2.gameObject.SetActive(false);
+        SetStateOfCameras(false,false,false,false);
         Debug.Log("End of Game: " + winner + " wins!");
         // Show end game panel
-        GameObject endGamePanel = GameObject.Find("EndGamePanel");
-        if(endGamePanel == null)
+        endGameCanvas.SetActive(true);
+        
+        StartCoroutine(DeactivateEndGameCanvas(5));
+        GameObject endGamePanel = endGameCanvas.transform.GetChild(0).gameObject;
+        //endGamePanel.transform.Find("Winner").GetComponent<UnityEngine.UI.Text>().text = winner; // LLAMADOR DEL TEXTO
+    }
+
+    public IEnumerator DeactivateEndGameCanvas(float time)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < time)
         {
-            Debug.Log("Error: EndGamePanel not found, check EndOfGame on GameController");
-            return;
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
-        endGamePanel.SetActive(true);
-        endGamePanel.transform.Find("Winner").GetComponent<UnityEngine.UI.Text>().text = winner;
+        endGameCanvas.SetActive(false);
     }
 
     public void UpdateStage(GameStage nextStage)
@@ -176,6 +192,7 @@ public class GameController : MonoBehaviour
         camera3.gameObject.SetActive(RotateCamera);
         camera4.gameObject.SetActive(RotateCameraFull);
     }
+
 }
 
 
