@@ -82,10 +82,13 @@ public class FirePowerController : MonoBehaviour
     {
         if(totalHits == totalSizeOfShip)
         {
-            //Ship is sunk
-            //REMOVE THIS AFTER TESTS
-            Destroy(this.gameObject);
-            //REMOVE THIS AFTER TESTS
+            var scale =fireSpots[0].transform.localScale;
+            var newScale = new Vector3(scale.x * 2, scale.y * 2, scale.z * 2);
+            foreach (var spot in fireSpots)
+            {
+                spot.transform.localScale = newScale;
+                spot.GetComponent<ParticleSystem>().Play();
+            }
             Debug.Log("Ship is sunk");
         }
         

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,9 +54,9 @@ public class AnimationController : MonoBehaviour
             case HitResult.Miss:
                 PlayMissExplosion(currentPosition);
                 break;
-            /*case HitResult.Sunk:
+            case HitResult.Sunk:
                 PlaySunkExplosion(currentPosition);
-                break;*/
+                break;
             case HitResult.Hit:
                 PlayHitExplosion(currentPosition);
                 break;
@@ -82,6 +83,58 @@ public class AnimationController : MonoBehaviour
         StartCoroutine(ShowHitAnimation(3f, position));
     }
 
+        public void PlaySunkExplosion(Vector3 position)
+    {
+        position.y += 12f;
+        StartCoroutine(ShowSunkExplosion(3f, 2f , 5f, position));
+        
+    }
+
+    private IEnumerator ShowSunkExplosion(float initialDelay, float betweenExplosionsDelay  , float finalDelay ,Vector3 position)
+    {
+        float elapsed = 0f;
+        while (elapsed < initialDelay)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        Ship ship = PlayerController.instance.GetShipByPosition(position);
+        int totalHits = ship.shipTiles.Where(x => x.hitted == true).Count();
+        ship.gameObject.GetComponent<FirePowerController>().TakeDamage(totalHits , ship.shipTiles.Count);
+        elapsed = 0f;
+        while(betweenExplosionsDelay >= 0)
+        {
+            GameObject explosionsFolder = ship.gameObject.transform.Find("Explosions").gameObject;
+            if(explosionsFolder == null)
+            {
+                Debug.Log("Explosions folder not found in ship: " + ship.name);
+                yield break;
+            }
+            for (int i = 0; i < explosionsFolder.transform.childCount; i++)
+            {
+                GameObject explosion = explosionsFolder.transform.GetChild(i).gameObject;   
+                explosion.GetComponent<ParticleSystem>().Play();
+                explosion.GetComponent<AudioSource>().Play();
+                elapsed = 0f;
+                while (elapsed < betweenExplosionsDelay)
+                {
+                    elapsed += Time.deltaTime;
+                    yield return null;
+                }
+            }
+            betweenExplosionsDelay--;
+            elapsed = 0f;
+        }
+
+        while (elapsed < finalDelay)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        cameraRotatorFull.GetComponent<CameraRotator>().StopRotation();
+        GameController.instance.UpdateStage(GameStage.PlayerAttackEnemyMap);
+    }
+
     public IEnumerator ShowMissExplosion(float delay, Vector3 position)
     {
         float elapsed = 0f;
@@ -105,13 +158,7 @@ public class AnimationController : MonoBehaviour
     }
 
 
-    public void PlaySunkExplosion(Vector3 position)
-    {
-        //GameObject explosion = Instantiate(sunkExplosion, position, Quaternion.identity);
-        //Destroy(explosion, 5f);
-        cameraRotatorFull.GetComponent<CameraRotator>().StopRotation();
-        GameController.instance.UpdateStage(GameStage.PlayerAttackEnemyMap);
-    }
+
 
 
 
@@ -129,7 +176,7 @@ public class AnimationController : MonoBehaviour
                 yield return null;
             }
             GameObject explosion = Instantiate(HitExplosion, position, Quaternion.identity);
-            explosion.transform.localScale = new Vector3(explosion.transform.localScale.x / 2, explosion.transform.localScale.y / 2, explosion.transform.localScale.z / 2);
+            explosion.transform.localScale = new Vector3(explosion.transform.localScale.x , explosion.transform.localScale.y , explosion.transform.localScale.z );
             explosion.GetComponent<ParticleSystem>().Play();
             cameraRotatorFull.GetComponentInChildren<AudioSource>().clip = BombExplosion;    
             cameraRotatorFull.GetComponentInChildren<AudioSource>().Play();

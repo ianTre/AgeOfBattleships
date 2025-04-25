@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -17,7 +18,7 @@ public class GameController : MonoBehaviour
     Camera camera3;
     [SerializeField]
     Camera camera4;
-
+    List<string> coordinates = new List<string>();
 
     private Ship shipToAction;
 
@@ -29,6 +30,15 @@ public class GameController : MonoBehaviour
         currentStage = GameStage.Deploy;
         camera1.gameObject.SetActive(true);
         camera2.gameObject.SetActive(false);
+
+        
+        coordinates.Add("0,0");
+        coordinates.Add("0,1");
+        coordinates.Add("0,2");
+        coordinates.Add("0,3");
+        coordinates.Add("0,4");
+        coordinates.Add("0,5");
+        coordinates.Add("0,6");
     }
 
     /// <summary>
@@ -103,7 +113,12 @@ public class GameController : MonoBehaviour
     public void TransitionToIAAttack()
     {
         currentStage = GameStage.IAAttackPlayerMap;
-        EnemyMapController.instance.IAEnemyShot();
+        //EnemyMapController.instance.IAEnemyShot();
+        Debug.Log("Enter coordinates");
+        var rowNumber = int.Parse(coordinates[0].Split(',')[0]);
+        var columnNumber = int.Parse(coordinates[0].Split(',')[1]);
+        coordinates.RemoveAt(0);
+        PlayerController.instance.ProcessEnemyHit(rowNumber,columnNumber);
         if(PlayerController.instance.CheckEndOfGame())
         {
             actionStage = GameStage.EndOfGame;
