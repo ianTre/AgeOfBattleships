@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject explosions; 
     private int shipCount; 
-    private int totalShipAvailable = 5;  // Total number of ships available for deployment
+    // private int totalShipAvailable = 5;  // Total number of ships available for deployment
     
     // Start is called before the first frame update
 
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public void EndDeployStage()
     {
-        if(totalShipAvailable == shipCount)
+        if(shipCount > 0) // (totalShipAvailable == shipCount) << original condition, temporarily changed
         {
             GameController.instance.UpdateStage(GameStage.PlayerAttackEnemyMap);
         }

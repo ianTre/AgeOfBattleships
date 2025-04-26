@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -191,6 +192,8 @@ public class EnemyMapController : MonoBehaviour
                     Vector3 newPosition= new Vector3(tile.Xpos,tile.Ypos + 6 ,tile.Zpos);
                                         Ship NewShip = Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
                     enemyShips.Add(NewShip);
+                    enemyShips.FindAll(x => x.shipType == ship.shipType).ForEach(x => x.gameObject.GetComponent<Renderer>().enabled = false); 
+                    NewShip.GetComponentsInChildren<Renderer>().ToList().ForEach(x => x.enabled = false); 
                     foundRightSpot = true;
                 }
 
