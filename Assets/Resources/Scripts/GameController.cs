@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,8 +21,10 @@ public class GameController : MonoBehaviour
     Camera camera4;
     [SerializeField]
     GameObject endGameCanvas;
-    List<string> coordinates = new List<string>();
+    [SerializeField]
+    AudioClip gameOverSound;
 
+    List<string> coordinates = new List<string>();
     private Ship shipToAction;
 
     private void Awake() {
@@ -158,15 +161,35 @@ public class GameController : MonoBehaviour
 
     public void EndOfGame(string winner)
     {
+        GameObject endGamePanel;
+        AudioSource audio;
+
+        if(winner == "IA") // In case we want different end game for IA
+        {
+            currentStage = GameStage.EndOfGame;
+            SetStateOfCameras(false,false,false,false);
+            Debug.Log("End of Game: " + winner + " wins!");
+            // Show end game panel
+            endGameCanvas.SetActive(true);
+            StartCoroutine(DeactivateEndGameCanvas(5));
+            endGamePanel = endGameCanvas.transform.GetChild(0).gameObject;
+            audio = endGamePanel.GetComponent<AudioSource>();
+            audio.clip = gameOverSound;
+            audio.Play();
+        }
+
         currentStage = GameStage.EndOfGame;
         SetStateOfCameras(false,false,false,false);
         Debug.Log("End of Game: " + winner + " wins!");
         // Show end game panel
         endGameCanvas.SetActive(true);
-        
-        StartCoroutine(DeactivateEndGameCanvas(5));
-        GameObject endGamePanel = endGameCanvas.transform.GetChild(0).gameObject;
-        //endGamePanel.transform.Find("Winner").GetComponent<UnityEngine.UI.Text>().text = winner; // LLAMADOR DEL TEXTO
+        StartCoroutine(DeactivateEndGameCanvas(10));
+        endGamePanel = endGameCanvas.transform.GetChild(0).gameObject;
+        endGamePanel.GetComponentInChildren<TextMeshProUGUI>().text = winner + " wins!";
+        audio = endGamePanel.GetComponent<AudioSource>();
+        audio.clip = gameOverSound;
+        audio.Play();
+ 
     }
 
     public IEnumerator DeactivateEndGameCanvas(float time)
