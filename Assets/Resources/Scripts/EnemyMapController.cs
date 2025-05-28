@@ -189,23 +189,48 @@ public class EnemyMapController : MonoBehaviour
                         quaternion = Quaternion.Euler(new Vector3(0,90,0)); //ROTATED TO HORIZONTAL
                     else
                         quaternion = Quaternion.identity; // ROTATED VERTICALLY
-                    Vector3 newPosition= new Vector3(tile.Xpos,tile.Ypos + 6 ,tile.Zpos);
-                                        Ship NewShip = Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
+                    
+                    Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 6 ,tile.Zpos);
+                    if (ship.Size() % 2 == 0)
+                    {
+                        if(!VerticalOrientation)
+                            position.x += tile.transform.localScale.x / 2; //If the ship is even, we need to adjust the position to the center of the tile
+                        else
+                            position.z -= tile.transform.localScale.z / 2; //If the ship is even, we need to adjust the position to the center of the tile
+                    }
+                    Vector3 newPosition = position;
+                    Ship NewShip = Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
+                    SetEnemyShipLayerRecursive(NewShip.gameObject);
                     enemyShips.Add(NewShip);
-                    enemyShips.FindAll(x => x.shipType == ship.shipType).ForEach(x => x.gameObject.GetComponent<Renderer>().enabled = false); 
-                    NewShip.GetComponentsInChildren<Renderer>().ToList().ForEach(x => x.enabled = false); 
+                    //enemyShips.FindAll(x => x.shipType == ship.shipType).ForEach(x => x.gameObject.GetComponent<Renderer>().enabled = false); 
+                    //NewShip.GetComponentsInChildren<Renderer>().ToList().ForEach(x => x.enabled = false); 
                     foundRightSpot = true;
                 }
-
             }
-            
+        }
+    }
+    
+
+
+
+    
+    private void SetEnemyShipLayerRecursive(GameObject _go)
+    {
+        _go.layer = LayerMask.NameToLayer("EnemyShips");
+        foreach (Transform child in _go.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("EnemyShips");
+
+            Transform _HasChildren = child.GetComponentInChildren<Transform>();
+            if (_HasChildren != null)
+                SetEnemyShipLayerRecursive(child.gameObject);
         }
     }
 
-        private void AddIfExists(List<Tile> list, int z, int x)
+    private void AddIfExists(List<Tile> list, int z, int x)
     {
-        Tile tile = FindTileByCoord(z,x);
-        if(tile != null)
+        Tile tile = FindTileByCoord(z, x);
+        if (tile != null)
             list.Add(tile);
     }
 
@@ -250,7 +275,7 @@ public class EnemyMapController : MonoBehaviour
         {
             int auxXCoord = originalTile.XCoord;
             int auxZCoord = originalTile.ZCoord;
-            if (verticallyOriented)
+            if (!verticallyOriented)
             {
                 if (plus)
                 {

@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Virtence.VText.Demo;
 using Image = UnityEngine.UI.Image;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -97,15 +98,21 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void CreateObject(Tile tile)
     {
-        if(ScriptableObject.PrefabToInstantiate == null)
+        GameObject obj;
+        if (ScriptableObject.PrefabToInstantiate == null)
         {
             Debug.Log("No prefab to instatiate");
             return;
         }
-
         Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 6, tile.Zpos);
-        GameObject obj;
-        
+        if (GetNumberOfTilesToDeploy(ScriptableObject.PrefabToInstantiate) % 2 == 0)
+        {
+            if (PlayerController.instance.leftCtrlPressed)
+                position.x += tile.transform.localScale.x / 2; // Offset to the right
+            else
+                position.z -= tile.transform.localScale.z / 2; // Offset to the back
+        }
+
         Quaternion quaternion;
         if(PlayerController.instance.leftCtrlPressed)
             quaternion = Quaternion.Euler(new Vector3(0,90,0)); //ROTATED TO HORIZONTAL
@@ -125,6 +132,18 @@ public class DragUIShips : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             this.transform.parent.Find("Outter").GetComponent<Image>().color = notAvailableColor;
         }
     }
+
+    private int GetNumberOfTilesToDeploy(GameObject prefab)
+    {
+        Ship ship = prefab.GetComponent<Ship>();
+        if(ship == null)
+        {
+            Debug.LogError("Prefab does not have a Ship component");
+            return 0;
+        }
+        return ship.Size();
+    }
+
 
     IEnumerator Coroutine_MoveUIElement(RectTransform r , Vector2 targetPosition , float duration = 0.1f)
     {
