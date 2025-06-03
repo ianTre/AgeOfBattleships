@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Resources.Scripts;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -38,12 +39,15 @@ public class EnemyMapController : MonoBehaviour
 
     private int rowNumber;
     private int columnNumber;
-    private void Awake() {
+    private AOBLogger logger;
+    private void Awake()
+    {
         instance = this;
     }
     // Start is called before the first frame update 
     void Start()
     {
+        logger = new AOBLogger();
         EnemyShipsGO = GameObject.Find("EnemyShips");
         enemyMap = GameObject.Find("EnemyMap");
         if(enemyMap==null || EnemyShipsGO == null)
@@ -170,50 +174,60 @@ public class EnemyMapController : MonoBehaviour
         foreach (Ship ship in enemyShipsToAdd)
         {
             bool foundRightSpot = false;
-            while(!foundRightSpot)
+            Ship NewShip = null;
+            while (!foundRightSpot)
             {
-                bool VerticalOrientation = Random.Range(0,2) == 0;
-                int rowNumber = Random.Range(0,MapController.instance.rowSize);
-                int columnNumber = Random.Range(0,MapController.instance.columSize);
-                Tile tile = FindTileByCoord(rowNumber,columnNumber);
-                if(tile==null)
+                bool VerticalOrientation = Random.Range(0, 2) == 0;
+                int rowNumber = Random.Range(0, MapController.instance.rowSize);
+                int columnNumber = Random.Range(0, MapController.instance.columSize);
+                Tile tile = FindTileByCoord(rowNumber, columnNumber);
+                if (tile == null)
                 {
                     Debug.Log("Check GenerateEnemyShips on EnemyMapController , wrong tile coords were generated");
                     break;
                 }
 
-                if(CanShipBeDeployed(tile,ship,VerticalOrientation))
+                #region Create a new instance of the ship
+                Quaternion quaternion;
+                if (!VerticalOrientation)
+                    quaternion = Quaternion.Euler(new Vector3(0, 90, 0)); //ROTATED TO HORIZONTAL
+                else
+                    quaternion = Quaternion.identity; // ROTATED VERTICALLY
+
+                Vector3 position = new Vector3(tile.Xpos, tile.Ypos + 6, tile.Zpos);
+                if (ship.Size() % 2 == 0) //If the ship is even, we need to adjust the position to the center of the tile
                 {
-                     Quaternion quaternion;
-                    if(!VerticalOrientation)
-                        quaternion = Quaternion.Euler(new Vector3(0,90,0)); //ROTATED TO HORIZONTAL
+                    if (!VerticalOrientation)
+                        position.x += tile.transform.localScale.x / 2; 
                     else
-                        quaternion = Quaternion.identity; // ROTATED VERTICALLY
-                    
-                    Vector3 position = new Vector3(tile.Xpos,tile.Ypos + 6 ,tile.Zpos);
-                    if (ship.Size() % 2 == 0)
-                    {
-                        if(!VerticalOrientation)
-                            position.x += tile.transform.localScale.x / 2; //If the ship is even, we need to adjust the position to the center of the tile
-                        else
-                            position.z -= tile.transform.localScale.z / 2; //If the ship is even, we need to adjust the position to the center of the tile
-                    }
-                    Vector3 newPosition = position;
-                    Ship NewShip = Instantiate(ship,newPosition,quaternion,EnemyShipsGO.transform);
-                    SetEnemyShipLayerRecursive(NewShip.gameObject);
-                    enemyShips.Add(NewShip);
-                    //enemyShips.FindAll(x => x.shipType == ship.shipType).ForEach(x => x.gameObject.GetComponent<Renderer>().enabled = false); 
-                    //NewShip.GetComponentsInChildren<Renderer>().ToList().ForEach(x => x.enabled = false); 
-                    foundRightSpot = true;
+                        position.z -= tile.transform.localScale.z / 2;
                 }
+                Vector3 newPosition = position;
+                Debug.Log("Enemy ship " + ship.shipType + " will be deployed at " + tile.XCoord + "," + tile.ZCoord + " with orientation " + (VerticalOrientation ? "Vertical" : "Horizontal"));
+                NewShip = Instantiate(ship, newPosition, quaternion, EnemyShipsGO.transform);
+                foundRightSpot = CheckNewPosition(NewShip);
+                #endregion
             }
+            enemyShips.Add(NewShip);
+            SetEnemyShipLayerRecursive(NewShip.gameObject);
         }
     }
-    
 
+    private bool CheckNewPosition(Ship newShip)
+    {
+        List<Tile> newTiles = newShip.ocuppiedTiles;
+        List<Tile> enemyTiles = enemyShips.SelectMany(ship => ship.ocuppiedTiles).ToList();
+        
+        logger.Log("New tiles for battleship " + newShip.shipType + " are : " + string.Join(",", newTiles.Select(tile => "(" + tile.ZCoord + "," + tile.XCoord + ")")));
+        logger.Log("Enemy tiles are:" + string.Join(",", enemyTiles.Select(tile => "(" + tile.ZCoord + "," + tile.XCoord + ")")));
+        if (newTiles.Any(tile => enemyTiles.Exists(et => et.ZCoord == tile.ZCoord && et.XCoord == tile.XCoord)))
+        {
+            Destroy(newShip.gameObject);
+            return false;
+        }
+        return true;
+    }
 
-
-    
     private void SetEnemyShipLayerRecursive(GameObject _go)
     {
         _go.layer = LayerMask.NameToLayer("EnemyShips");
@@ -259,7 +273,7 @@ public class EnemyMapController : MonoBehaviour
 
 
 
-    public bool CanShipBeDeployed(Tile originalTile,Ship newShip,bool verticallyOriented)
+/*    public bool CanShipBeDeployed(Tile originalTile,Ship newShip,bool verticallyOriented)
     {
         
         List<Tile> tilesToBeOccuppied = new List<Tile>();
@@ -312,9 +326,9 @@ public class EnemyMapController : MonoBehaviour
             if (ship.ocuppiedTiles.Exists(tile => tilesToBeOccuppied.Contains(tile)))
                 return false;
         }
-
+        Debug.Log("tiles checked are :" + string.Join(",", tilesToBeOccuppied.Select(tile => "(" + tile.ZCoord + "," + tile.XCoord + ")")));
         return true;
-    }
+    }*/
 
     public void IAEnemyShot()
     {   
