@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1378537015346405192}
   m_Layer: 0
   m_Name: Medium Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 3964888742131996180}
   m_Layer: 0
   m_Name: FireSpots
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 3798429049864318581}
   m_Layer: 0
   m_Name: Weapons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 741615104477149985}
   m_Layer: 0
   m_Name: Medium Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 621718893739960669}
   m_Layer: 0
   m_Name: Explosions
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 2908342585733585322}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 6629130883486746242}
   m_Layer: 0
   m_Name: Medium Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 8623016275260619103}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 1449148115872851382}
   m_Layer: 0
   m_Name: Medium Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -882,7 +882,7 @@ MonoBehaviour:
   attackPoints: 0
   defencePoints: 0
   Speed: 0
-  SelectedAction: 0
+  attackMode: 0
   hasfocus: 0
   shipType: 1
   ocuppiedTiles: []
@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 2902234938131868885}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1182,6 +1182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBigSmoke (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1265,6 +1269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBigSmoke (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1291,6 +1299,10 @@ PrefabInstance:
     - target: {fileID: 1467291085351855880, guid: 1ffe2b329af91184f89099a57b431d19, type: 3}
       propertyPath: m_Name
       value: Explosion01 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467291085351855880, guid: 1ffe2b329af91184f89099a57b431d19, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     - target: {fileID: 1467291085351855885, guid: 1ffe2b329af91184f89099a57b431d19, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1410,6 +1422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBigSmoke
       objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1436,6 +1452,10 @@ PrefabInstance:
     - target: {fileID: 1467291085351855880, guid: 1ffe2b329af91184f89099a57b431d19, type: 3}
       propertyPath: m_Name
       value: Explosion01 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467291085351855880, guid: 1ffe2b329af91184f89099a57b431d19, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     - target: {fileID: 1467291085351855885, guid: 1ffe2b329af91184f89099a57b431d19, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1555,6 +1575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1632,6 +1656,10 @@ PrefabInstance:
     - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
       propertyPath: m_Name
       value: ExplosionShipHit (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1711,6 +1739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1789,6 +1821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1866,6 +1902,10 @@ PrefabInstance:
     - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: m_Name
       value: FireBigSmoke (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

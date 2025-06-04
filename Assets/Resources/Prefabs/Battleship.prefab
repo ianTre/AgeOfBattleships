@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5866496240878800868}
   m_Layer: 0
   m_Name: Large Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 6930147485039043490}
   m_Layer: 0
   m_Name: Weapons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 8909819625330703099}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 1300995497128511522}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 3959363653582807279}
   m_Layer: 0
   m_Name: Large Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 3015572399632717138}
   m_Layer: 0
   m_Name: FireSpots
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 5165875385488218080}
   m_Layer: 0
   m_Name: Medium Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 8682657217013662969}
   m_Layer: 0
   m_Name: Explosions
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 1053610065697921397}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 7771454462117998583}
   m_Layer: 0
   m_Name: Medium Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -876,7 +876,7 @@ GameObject:
   - component: {fileID: 2249298688866224646}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 410356692772826017}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1086,7 +1086,7 @@ GameObject:
   - component: {fileID: 3247356384779580227}
   m_Layer: 0
   m_Name: Medium Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1192,7 +1192,7 @@ GameObject:
   - component: {fileID: 650062235899089494}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1297,7 +1297,7 @@ GameObject:
   - component: {fileID: 7296687960023794233}
   m_Layer: 0
   m_Name: Medium Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   attackPoints: 0
   defencePoints: 0
   Speed: 0
-  SelectedAction: 0
+  attackMode: 0
   hasfocus: 0
   shipType: 5
   ocuppiedTiles: []
@@ -1666,7 +1666,7 @@ GameObject:
   - component: {fileID: 3302229998446548093}
   m_Layer: 0
   m_Name: Medium Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1771,7 +1771,7 @@ GameObject:
   - component: {fileID: 7195633326468823646}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1877,7 +1877,7 @@ GameObject:
   - component: {fileID: 8382054679094688492}
   m_Layer: 0
   m_Name: Medium Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1982,7 +1982,7 @@ GameObject:
   - component: {fileID: 1259642488476788020}
   m_Layer: 0
   m_Name: Large Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2088,7 +2088,7 @@ GameObject:
   - component: {fileID: 8053296329505423839}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2194,7 +2194,7 @@ GameObject:
   - component: {fileID: 8616678796894189386}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2300,7 +2300,7 @@ GameObject:
   - component: {fileID: 9078914075125027672}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2406,7 +2406,7 @@ GameObject:
   - component: {fileID: 2583186416897135860}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2511,7 +2511,7 @@ GameObject:
   - component: {fileID: 5180972284842098320}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2616,7 +2616,7 @@ GameObject:
   - component: {fileID: 1616668780697371252}
   m_Layer: 0
   m_Name: Large Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2722,7 +2722,7 @@ GameObject:
   - component: {fileID: 7046740619595628030}
   m_Layer: 0
   m_Name: Large Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2828,7 +2828,7 @@ GameObject:
   - component: {fileID: 4041790962350590847}
   m_Layer: 0
   m_Name: Medium Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2934,7 +2934,7 @@ GameObject:
   - component: {fileID: 2700124360181998226}
   m_Layer: 0
   m_Name: Medium Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3040,7 +3040,7 @@ GameObject:
   - component: {fileID: 8637295809839764940}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3145,7 +3145,7 @@ GameObject:
   - component: {fileID: 1870876915918949656}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3251,7 +3251,7 @@ GameObject:
   - component: {fileID: 6544029102041847706}
   m_Layer: 0
   m_Name: Small Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3357,7 +3357,7 @@ GameObject:
   - component: {fileID: 6820178780923380514}
   m_Layer: 0
   m_Name: Small Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3462,7 +3462,7 @@ GameObject:
   - component: {fileID: 6828932868605037836}
   m_Layer: 0
   m_Name: Large Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3578,7 +3578,7 @@ GameObject:
   - component: {fileID: 2699556523662248106}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3885,7 +3885,7 @@ GameObject:
   - component: {fileID: 6745334329109035392}
   m_Layer: 0
   m_Name: Large Cannons
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3991,7 +3991,7 @@ GameObject:
   - component: {fileID: 5944454990586334171}
   m_Layer: 0
   m_Name: Large Turret
-  m_TagString: Untagged
+  m_TagString: ShipComponenet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4159,6 +4159,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4237,6 +4241,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion01
       objectReference: {fileID: 0}
+    - target: {fileID: 7354695869903840038, guid: 8d03efb8852445040b36a90d33f0f5c6, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4255,6 +4263,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -4314,6 +4342,26 @@ PrefabInstance:
     - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: m_Name
       value: FireBigSmoke (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4406,6 +4454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4492,6 +4544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4510,6 +4566,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 804648237810042342, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -4570,6 +4650,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBigSmoke (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4588,6 +4688,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 804648237810042342, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -4647,6 +4771,26 @@ PrefabInstance:
     - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: m_Name
       value: FireBigSmoke (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4739,6 +4883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4825,6 +4973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4843,6 +4995,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 804648237810042342, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -4903,6 +5079,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBigSmoke
       objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4926,6 +5122,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 804648237810042342, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -4986,6 +5206,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBigSmoke (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5009,6 +5249,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 804648237810042342, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -5068,6 +5332,26 @@ PrefabInstance:
     - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: m_Name
       value: FireBigSmoke (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5160,6 +5444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionShipHit
       objectReference: {fileID: 0}
+    - target: {fileID: 6860670219134366031, guid: 8934067f75b4ea94e93e0127fd0419f7, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5225,6 +5513,10 @@ PrefabInstance:
     - target: {fileID: 7354695869903840038, guid: 8d03efb8852445040b36a90d33f0f5c6, type: 3}
       propertyPath: m_Name
       value: Explosion01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354695869903840038, guid: 8d03efb8852445040b36a90d33f0f5c6, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5354,6 +5646,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion01
       objectReference: {fileID: 0}
+    - target: {fileID: 7354695869903840038, guid: 8d03efb8852445040b36a90d33f0f5c6, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5372,6 +5668,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 804648237810042342, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -5432,6 +5752,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBigSmoke (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5455,6 +5795,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3015572399632717138}
     m_Modifications:
+    - target: {fileID: 804648237810042342, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643305569431474870, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505366597441880359, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140866246662045581, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617206948009912868, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483364415629660860, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
     - target: {fileID: 7125888256497354232, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -5514,6 +5878,26 @@ PrefabInstance:
     - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
       propertyPath: m_Name
       value: FireBigSmoke (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125888256497354238, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267108296236063819, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959455492073532537, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8995766698445548065, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039298696837982572, guid: b5efb66eab1294244a22bbef2927c2aa, type: 3}
+      propertyPath: m_TagString
+      value: ShipComponenet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "AgeOfBattleships.sln"
+    "dotnet.defaultSolution": "AgeOfBattleships.sln",
+    "dotnet.preferCSharpExtension": true
 }

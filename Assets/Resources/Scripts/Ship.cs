@@ -113,19 +113,19 @@ public class Ship : MonoBehaviour
     }
 
 
-    public void OnMouseDown()
-    {          
-        if(hasfocus)
-        {
-         hasfocus = false;
-         selectionlight.SelectionLightOff(this);
-        }
-        else
-        {
-          hasfocus = true;
-          selectionlight.SelectionLightOn(coord, selectedTile, this); 
-        }
-    }
+    //public void OnMouseDown()
+    //{          
+    //    if(hasfocus)
+    //    {
+    //     hasfocus = false;
+    //     selectionlight.SelectionLightOff(this);
+    //    }
+    //    else
+    //    {
+    //      hasfocus = true;
+    //      selectionlight.SelectionLightOn(coord, selectedTile, this); 
+    //    }
+    //}
     
 }
 
