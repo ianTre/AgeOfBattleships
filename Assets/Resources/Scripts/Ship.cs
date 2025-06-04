@@ -15,7 +15,7 @@ public class Ship : MonoBehaviour
     public int attackPoints;
     public int defencePoints;
     public int Speed;
-    public Mode SelectedAction;
+    public Mode attackMode = Mode.None;
     public bool hasfocus = false;
     public ShipType shipType;
     public List<Tile> ocuppiedTiles;

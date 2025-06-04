@@ -16,6 +16,7 @@ namespace Assets.Resources.Scripts
         {
             string directory = Directory.GetCurrentDirectory(); //D:\UnityProjects\AgeOfBattleships
             path = directory + @"\Assets\Resources\Logger.txt";
+            
 
             if (!File.Exists(path))
                 File.Create(path).Dispose();
@@ -25,7 +26,7 @@ namespace Assets.Resources.Scripts
         public void Log(string message) 
         {
             using (TextWriter tw = new StreamWriter(path,true))
-            {
+            {   
                 tw.WriteLine(message);
             }
 

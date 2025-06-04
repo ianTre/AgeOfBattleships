@@ -168,49 +168,70 @@ public class EnemyMapController : MonoBehaviour
         }
     }
 
-    public void GenerateEnemyShips(List<Ship> enemyShipsToAdd)
+    public void GenerateEnemyShips(List<Ship> playerShipsToAddAsEnemy)
     {
+        StartCoroutine(CoRuGenerateEnemyShips(playerShipsToAddAsEnemy));
+        logger.Log("Finish coroutine");
+    }
 
-        foreach (Ship ship in enemyShipsToAdd)
-        {
-            bool foundRightSpot = false;
-            Ship NewShip = null;
-            while (!foundRightSpot)
+    public IEnumerator CoRuGenerateEnemyShips(List<Ship> playerShipsToAddAsEnemy)
+    {
+            foreach (Ship ship in playerShipsToAddAsEnemy)
             {
-                bool VerticalOrientation = Random.Range(0, 2) == 0;
-                int rowNumber = Random.Range(0, MapController.instance.rowSize);
-                int columnNumber = Random.Range(0, MapController.instance.columSize);
-                Tile tile = FindTileByCoord(rowNumber, columnNumber);
-                if (tile == null)
+                bool foundRightSpot = false;
+                Ship newShip = null;
+                while (!foundRightSpot)
                 {
-                    Debug.Log("Check GenerateEnemyShips on EnemyMapController , wrong tile coords were generated");
-                    break;
-                }
+                    try
+                    {
+                        bool VerticalOrientation = Random.Range(0, 2) == 0;
+                        int rowNumber = Random.Range(0, MapController.instance.rowSize);
+                        int columnNumber = Random.Range(0, MapController.instance.columSize);
+                        Tile tile = FindTileByCoord(rowNumber, columnNumber);
+                        if (tile == null)
+                        {
+                            Debug.Log("Check GenerateEnemyShips on EnemyMapController , wrong tile coords were generated");
+                            break;
+                        }
 
-                #region Create a new instance of the ship
-                Quaternion quaternion;
-                if (!VerticalOrientation)
-                    quaternion = Quaternion.Euler(new Vector3(0, 90, 0)); //ROTATED TO HORIZONTAL
-                else
-                    quaternion = Quaternion.identity; // ROTATED VERTICALLY
+                        #region Create a new instance of the ship
+                        Quaternion quaternion;
+                        if (!VerticalOrientation)
+                            quaternion = Quaternion.Euler(new Vector3(0, 90, 0)); //ROTATED TO HORIZONTAL
+                        else
+                            quaternion = Quaternion.identity; // ROTATED VERTICALLY
 
-                Vector3 position = new Vector3(tile.Xpos, tile.Ypos + 6, tile.Zpos);
-                if (ship.Size() % 2 == 0) //If the ship is even, we need to adjust the position to the center of the tile
-                {
-                    if (!VerticalOrientation)
-                        position.x += tile.transform.localScale.x / 2; 
-                    else
-                        position.z -= tile.transform.localScale.z / 2;
+                        Vector3 position = new Vector3(tile.Xpos, tile.Ypos + 6, tile.Zpos);
+                        if (ship.Size() % 2 == 0) //If the ship is even, we need to adjust the position to the center of the tile
+                        {
+                            if (!VerticalOrientation)
+                                position.x += tile.transform.localScale.x / 2;
+                            else
+                                position.z -= tile.transform.localScale.z / 2;
+                        }
+                        Vector3 newPosition = position;
+                        Debug.Log("Enemy ship " + ship.shipType + " will be deployed at " + tile.XCoord + "," + tile.ZCoord + " with orientation " + (VerticalOrientation ? "Vertical" : "Horizontal"));
+
+                        newShip = Instantiate(ship, newPosition, quaternion, EnemyShipsGO.transform);
+                        newShip.ocuppiedTiles.Clear();
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Log(ex.Message);
+                    }
+                    while (newShip.ocuppiedTiles.Count == 0)
+                    {
+                        logger.Log("waiting");
+                        yield return null;
+                    }
+                    foundRightSpot = CheckNewPosition(newShip);
+                    #endregion
                 }
-                Vector3 newPosition = position;
-                Debug.Log("Enemy ship " + ship.shipType + " will be deployed at " + tile.XCoord + "," + tile.ZCoord + " with orientation " + (VerticalOrientation ? "Vertical" : "Horizontal"));
-                NewShip = Instantiate(ship, newPosition, quaternion, EnemyShipsGO.transform);
-                foundRightSpot = CheckNewPosition(NewShip);
-                #endregion
+                enemyShips.Add(newShip);
+                SetEnemyShipLayerRecursive(newShip.gameObject);
             }
-            enemyShips.Add(NewShip);
-            SetEnemyShipLayerRecursive(NewShip.gameObject);
-        }
+        
+     
     }
 
     private bool CheckNewPosition(Ship newShip)
@@ -226,6 +247,7 @@ public class EnemyMapController : MonoBehaviour
             return false;
         }
         return true;
+
     }
 
     private void SetEnemyShipLayerRecursive(GameObject _go)

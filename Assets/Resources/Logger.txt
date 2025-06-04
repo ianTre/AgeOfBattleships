@@ -1,6 +1,0 @@
-New tiles for battleship Battleship are : (2,0),(1,0),(4,0),(3,0),(5,0)
-Enemy tiles are:
-New tiles for battleship Destroyer are : (7,3),(5,3),(4,3),(6,3)
-Enemy tiles are:(2,0),(1,0),(4,0),(3,0),(5,0)
-New tiles for battleship Crusier are : (6,14),(4,14),(5,14)
-Enemy tiles are:(2,0),(1,0),(4,0),(3,0),(5,0),(7,3),(5,3),(4,3),(6,3)

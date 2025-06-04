@@ -87,7 +87,6 @@ public class AnimationController : MonoBehaviour
     {
         position.y += 12f;
         StartCoroutine(ShowSunkExplosion(3f, 2f , 5f, position));
-        
     }
 
     private IEnumerator ShowSunkExplosion(float initialDelay, float betweenExplosionsDelay  , float finalDelay ,Vector3 position)
