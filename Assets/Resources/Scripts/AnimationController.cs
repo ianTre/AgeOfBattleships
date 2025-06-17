@@ -157,10 +157,6 @@ public class AnimationController : MonoBehaviour
     }
 
 
-
-
-
-
     public IEnumerator ShowHitAnimation(float delay ,Vector3 position)
     {
         float elapsed = 0f;

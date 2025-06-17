@@ -42,33 +42,21 @@ public class Ship : MonoBehaviour
      // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Delete) && hasfocus)
-        {
-            PlayerController.instance.RemoveShip(this);
-            Destroy(this.gameObject);
-            selectionlight.SelectionLightOff(this);
-        }
-        /*
-        if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
-        {
-            Debug.Log("Fire!");
-            firePowerController.FireCannons();
-        }*/
+    }
 
-        if(Input.GetKeyDown(KeyCode.Space) && hasfocus)
-        {
-            Debug.Log("OUCHH!");
-            Tile myTile = shipTiles.First(x => x.hitted == false).tile;
-            TakeHit(myTile);
-        }
+    public void DestroyShip()
+    {
+        PlayerController.instance.RemoveShip(this);
+        Destroy(this.gameObject);
+        selectionlight.SelectionLightOff(this);
     }
 
     public void AddOcuppiedTile(Tile tile)
     {
-        if(!ocuppiedTiles.Contains(tile)) 
-        { 
+        if (!ocuppiedTiles.Contains(tile))
+        {
             ocuppiedTiles.Add(tile);
-            shipTiles.Add(new ShipTile(tile,count++));
+            shipTiles.Add(new ShipTile(tile, count++));
             selectedTile = tile;
             coord = ocuppiedTiles.Average(x => x.ZCoord);
         }
