@@ -8,6 +8,8 @@ TagManager:
   - Ship
   - Explosions
   - ShipComponenet
+  - RadarSweep
+  - SweepHit
   layers:
   - Default
   - TransparentFX

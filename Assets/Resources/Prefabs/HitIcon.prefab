@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 6878085028961485253, guid: 39d2749946d86d7429589a029bdb9c73, type: 3}
+      propertyPath: m_TagString
+      value: SweepHit
+      objectReference: {fileID: 0}
     - target: {fileID: 7891144425505616003, guid: 39d2749946d86d7429589a029bdb9c73, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
