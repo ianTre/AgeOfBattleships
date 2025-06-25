@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -15,7 +16,9 @@ public class PlayerController : MonoBehaviour
     public bool cameraOnMain = true;
     public Dictionary<ShipType,string> panelForShip;
     [SerializeField]
-    GameObject explosions; 
+    GameObject explosions;
+    [SerializeField]
+    GameObject VirtualCamera; 
     private int shipCount; 
     // private int totalShipAvailable = 5;  // Total number of ships available for deployment
     
@@ -49,13 +52,14 @@ public class PlayerController : MonoBehaviour
             leftCtrlPressed=!leftCtrlPressed;
         }
 
-        /*if(Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            Debug.Log("M was pressed");
-            cameraOnMain=!cameraOnMain;
-            UpdateCameraPosition();
-            SetAtackMode(true);
-        }*/
+            VirtualCamera.SetActive(true);
+
+            GameObject.Find("TimeLine").GetComponent<PlayableDirector>().Play();
+            //add time 6 seconds stop the timeline         
+            Debug.Log("Timeline started");
+        }
     }
 
     /*private void SetAtackMode(bool v)
