@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 21824930312032461, guid: 39d2749946d86d7429589a029bdb9c73, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a9b602202f1645c4594fb484bb2cc55a, type: 3}
+      objectReference: {fileID: 21300000, guid: 185bf4b7a52cb334da78e7b5558ae15d, type: 3}
     - target: {fileID: 6878085028961485253, guid: 39d2749946d86d7429589a029bdb9c73, type: 3}
       propertyPath: m_Name
       value: HitIcon
